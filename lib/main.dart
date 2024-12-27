@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'view_model/all_policies_view_model.dart';
 import 'view_model/appointment_view_model.dart';
 import 'view_model/document_verify_view_model.dart';
 
@@ -98,6 +99,7 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (context) => BankViewModel()),
               ChangeNotifierProvider(create: (context) => HelpViewModel()),
               ChangeNotifierProvider(create: (context) => StateCityViewModel()),
+              ChangeNotifierProvider(create: (context) => AllPoliciesViewModel()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

@@ -34,15 +34,15 @@ class _HomeHealthCardState extends State<HomeHealthCard> {
   Widget build(BuildContext context) {
     final profileViewModel =
         Provider.of<ProfileViewModel>(context).modelData?.data;
-    return profileViewModel != null
+    return profileViewModel == null
         ? Center(
             child: CircularProgressIndicator(
-            // color: ColorConstant.primaryColor,
-            color: Colors.red,
+            color: ColorConstant.primaryColor,
+            // color: Colors.red,
           ))
-        // :
-    // profileViewModel.status.toString() == "400"
-    //         ? const TextContext(data: "Opps! no data found")
+        :
+    profileViewModel.status.toString() == "400"
+            ? const TextContext(data: "Opps! no data found")
             : Scaffold(
                 resizeToAvoidBottomInset: false,
                 backgroundColor: ColorConstant.homeGaryColor,
@@ -56,7 +56,7 @@ class _HomeHealthCardState extends State<HomeHealthCard> {
                           width: 30,
                           child: Image.asset(
                             "assets/icon/green-Dot.gif",
-                            color: profileViewModel?.status.toString() == "0"
+                            color: profileViewModel.status.toString() == "0"
                                 ? ColorConstant.redColor
                                 : ColorConstant.greenColor,
                           )),
@@ -70,12 +70,11 @@ class _HomeHealthCardState extends State<HomeHealthCard> {
                     color: Color(0xff1E1E1E),
                   ),
                 ),
-                body: profileViewModel?.document.toString() == "0"
+                body: profileViewModel.documentstatus.toString() == "0"
                     ? verifyDocs()
-                    : profileViewModel?.document.toString() == "1"
+                    : profileViewModel.documentstatus.toString() == "1"
                         ? underProcess()
-                        // : profileViewModel?.document.toString() == "2"
-                        : profileViewModel?.document.toString() != "2"
+                        : profileViewModel.documentstatus.toString() == "2"
                             ?  const HomeScreen()
                             : const Text('No Data Found'),
               );

@@ -5,7 +5,7 @@ class ApiUrl {
 
   static const sendOtpUrl = "${baseUrl}doctor_otpsend";
   static const verifyOtpUrl = "${baseUrl}doctor_verifyotp";
-  static const profileUrl = "${baseUrl}doctor_profile/";
+  static const profileUrl = "${baseUrl}get/profile";
   static const doctorHistoryUrl = "${baseUrl}Doctor_history";
   static const doctorViewReviewUrl = "${baseUrl}doctor_view/";
   static const documentVerifyUrl = "${baseUrl}document_verify";
@@ -22,4 +22,5 @@ class ApiUrl {
   static const getSlotDates = "${baseUrl}slot_availbility/";
   static const getStateData = "${baseUrl}state";
   static const getDistrictData = "${baseUrl}city/";
+  static const policies = "${baseUrl}get/settings";
 }

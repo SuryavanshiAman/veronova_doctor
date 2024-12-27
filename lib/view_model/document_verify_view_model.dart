@@ -79,7 +79,7 @@ class DocumentVerifyViewModel with ChangeNotifier {
       "medical_degree": degreeImage,
     };
     _documentVerifyRepo.documentVerifyApi(data).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoading(false);
 
         final profileViewModel =
@@ -120,17 +120,17 @@ class DocumentVerifyViewModel with ChangeNotifier {
     final profileViewModel =
         Provider.of<ProfileViewModel>(context, listen: false).modelData?.data;
     Map data = {
-      "id": userId,
-      "status": profileViewModel!.status.toString() == "0" ? '1' : '0',
+      "userid": userId,
+      "status": profileViewModel!.status.toString() == "1" ? '2' : '1',
     };
     print(data);
+    print("😊😊😊");
     _documentVerifyRepo.updateStatusApi(data).then((value) {
-      if (value['status'] == 200) {
-
+      if (value['status'] == "200") {
         final profileViewModel =
             Provider.of<ProfileViewModel>(context, listen: false);
 
-        data["status"] == "0"
+        data["status"] == "1"
             ? Utils.show("You Are Now Offline", context)
             : Utils.show("You Are Now Online", context);
         profileViewModel.profileApi(context);

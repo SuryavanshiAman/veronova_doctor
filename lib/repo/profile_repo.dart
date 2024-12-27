@@ -9,11 +9,10 @@ import '../model/doc_cat_model.dart';
 class ProfileRepository {
   final BaseApiServices _apiServices = NetworkApiServices();
 
-  Future<ProfileModel> profileApi(dynamic data) async {
+  Future<dynamic> profileApi(dynamic data) async {
     try {
-      dynamic response =
-      await _apiServices.getGetApiResponse(ApiUrl.profileUrl + data);
-      return ProfileModel.fromJson(response);
+      dynamic response = await _apiServices.getPostApiResponse(ApiUrl.profileUrl,data);
+      return response;
     } catch (e) {
       if (kDebugMode) {
         print('Error occurred during profileApi: $e');

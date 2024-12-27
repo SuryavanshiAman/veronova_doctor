@@ -46,7 +46,7 @@ class _ProfileState extends State<Profile> {
     final profileViewModel =
         Provider.of<ProfileViewModel>(context, listen: false);
     profileViewModel.profileApi(context);
-    profileViewModel.doctorCatApi(context);
+    // profileViewModel.doctorCatApi(context);
     if (profileViewModel.modelData != null &&
         profileViewModel.modelData!.data != null &&
         profileViewModel.modelData!.data!.specialties != null) {
@@ -85,19 +85,31 @@ class _ProfileState extends State<Profile> {
               _isTextFieldEnabled = !_isTextFieldEnabled;
             });
             if (!_isTextFieldEnabled) {
-              final selectedSpecialitiesIds =
-                  selectedValues.map((e) => e.id).toList();
+              // final selectedSpecialitiesIds = selectedValues.map((e) => e.id).toList();
+              // print("SSSS:$selectedSpecialitiesIds");
+              // updateProfileViewModel.updateProfileApi(
+              //   name.text,
+              //   email.text,
+              //   qualification.text,
+              //   experience.text,
+              //   fees.text,
+              //   selectedSpecialitiesIds,
+              //   about.text,
+              //   context,
+              // );
+              final selectedSpecialitiesIds = selectedValues.isNotEmpty
+                  ? selectedValues.map((e) => e.id).toList()
+                  : selectedNotRemoveVal.map((e) => e.id).toList();
+
+              print("SSSS:$selectedSpecialitiesIds");
               updateProfileViewModel.updateProfileApi(
                 name.text,
                 email.text,
-                address.text,
                 qualification.text,
                 experience.text,
                 fees.text,
                 selectedSpecialitiesIds,
                 about.text,
-                selectedDistrict,
-                selectedState,
                 context,
               );
             }
@@ -192,7 +204,7 @@ class _ProfileState extends State<Profile> {
                               backgroundImage: viewModel.idProfileImage != null
                                   ? MemoryImage(
                                       base64Decode(viewModel.idProfileImage!))
-                                  : NetworkImage(profileViewModel?.profile.toString()??"data:image/png;base64,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")
+                                  : NetworkImage(profileViewModel!.image.toString())
                                       as ImageProvider, // Optional: Add an icon if no image
                               backgroundColor: Colors.transparent,
                               child: viewModel.idProfileImage == null
@@ -262,8 +274,8 @@ class _ProfileState extends State<Profile> {
                   intBorder: false,
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
-                  enabled: false,
-                  hintText: profileViewModel?.phone.toString()??"",
+                  enabled: _isTextFieldEnabled,
+                  hintText: profileViewModel?.mobile.toString()??"",
                   keyboardType: TextInputType.number,
                   hintStyle: const TextStyle(color: Colors.black),
                   prefixIcon: Icon(
@@ -290,61 +302,61 @@ class _ProfileState extends State<Profile> {
                     color: ColorConstant.primaryColor,
                   ),
                 ),
-                AppConstant.spaceHeight5,
-                TextfieldContext(
-                  hintStyle: TextStyle(
-                      color: profileViewModel?.address == null
-                          ? Colors.grey
-                          : Colors.black),
-                  keyboardType: TextInputType.streetAddress,
-                  intBorder: false,
-                  fillColor: ColorConstant.whiteColor,
-                  filled: true,
-                  hintText:
-                      profileViewModel?.address ?? 'Enter Your Clinic Address',
-                  prefixIcon: Icon(
-                    Icons.apartment,
-                    color: ColorConstant.primaryColor,
-                  ),
-                  enabled: _isTextFieldEnabled,
-                  controller: address,
-                ),
-                AppConstant.spaceHeight5,
-                TextfieldContext(
-                  hintStyle: TextStyle(
-                      color: profileViewModel?.city == null
-                          ? Colors.grey
-                          : Colors.black),
-                  keyboardType: TextInputType.streetAddress,
-                  intBorder: false,
-                  fillColor: ColorConstant.whiteColor,
-                  filled: true,
-                  hintText: profileViewModel?.city ?? 'Enter Your District',
-                  prefixIcon: Icon(
-                    Icons.apartment,
-                    color: ColorConstant.primaryColor,
-                  ),
-                  enabled: false,
-                  // controller: address,
-                ),
-                AppConstant.spaceHeight5,
-                TextfieldContext(
-                  hintStyle: TextStyle(
-                      color: profileViewModel?.state == null
-                          ? Colors.grey
-                          : Colors.black),
-                  keyboardType: TextInputType.streetAddress,
-                  intBorder: false,
-                  fillColor: ColorConstant.whiteColor,
-                  filled: true,
-                  hintText: profileViewModel?.state ?? 'Enter Your State',
-                  prefixIcon: Icon(
-                    Icons.apartment,
-                    color: ColorConstant.primaryColor,
-                  ),
-                  enabled: false,
-                  // controller: address,
-                ),
+                // AppConstant.spaceHeight5,
+                // TextfieldContext(
+                //   hintStyle: TextStyle(
+                //       color: profileViewModel?.address == null
+                //           ? Colors.grey
+                //           : Colors.black),
+                //   keyboardType: TextInputType.streetAddress,
+                //   intBorder: false,
+                //   fillColor: ColorConstant.whiteColor,
+                //   filled: true,
+                //   hintText:
+                //       profileViewModel?.address ?? 'Enter Your Clinic Address',
+                //   prefixIcon: Icon(
+                //     Icons.apartment,
+                //     color: ColorConstant.primaryColor,
+                //   ),
+                //   enabled: _isTextFieldEnabled,
+                //   controller: address,
+                // ),
+                // AppConstant.spaceHeight5,
+                // TextfieldContext(
+                //   hintStyle: TextStyle(
+                //       color: profileViewModel?.city == null
+                //           ? Colors.grey
+                //           : Colors.black),
+                //   keyboardType: TextInputType.streetAddress,
+                //   intBorder: false,
+                //   fillColor: ColorConstant.whiteColor,
+                //   filled: true,
+                //   hintText: profileViewModel?.city ?? 'Enter Your District',
+                //   prefixIcon: Icon(
+                //     Icons.apartment,
+                //     color: ColorConstant.primaryColor,
+                //   ),
+                //   enabled: false,
+                //   // controller: address,
+                // ),
+                // AppConstant.spaceHeight5,
+                // TextfieldContext(
+                //   hintStyle: TextStyle(
+                //       color: profileViewModel?.state == null
+                //           ? Colors.grey
+                //           : Colors.black),
+                //   keyboardType: TextInputType.streetAddress,
+                //   intBorder: false,
+                //   fillColor: ColorConstant.whiteColor,
+                //   filled: true,
+                //   hintText: profileViewModel?.state ?? 'Enter Your State',
+                //   prefixIcon: Icon(
+                //     Icons.apartment,
+                //     color: ColorConstant.primaryColor,
+                //   ),
+                //   enabled: false,
+                //   // controller: address,
+                // ),
               ],
             ),
           ),
@@ -408,7 +420,7 @@ class _ProfileState extends State<Profile> {
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
                   hintText: profileViewModel?.exp ?? 'Enter Yor Experience ',
-                  keyboardType: TextInputType.streetAddress,
+                  keyboardType: TextInputType.number,
                   enabled: _isTextFieldEnabled,
                   controller: experience,
                 ),
@@ -572,7 +584,7 @@ class _ProfileState extends State<Profile> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           TextContext(
-                                            // data: profileViewModel.specialties,
+                                            // data: profileViewModel!.specialties,
                                             data:
                                                 selectedNotRemoveVal[i].name ??
                                                     "",
@@ -626,110 +638,13 @@ class _ProfileState extends State<Profile> {
 
   dynamic selectedState;
   dynamic selectedDistrict;
-  // Widget stateDistrict() {
-  //   final stateCityViewModel = Provider.of<StateCityViewModel>(context);
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       const TextContext(
-  //         data: "State *",
-  //         fontWeight: FontWeight.w500,
-  //         color: Color(0xff444343),
-  //         fontSize: 15,
-  //       ),
-  //       Container(
-  //         padding: const EdgeInsets.only(right: 5, left: 15),
-  //         // width: width / 2.3,
-  //         height: height * 0.058,
-  //         decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(5),
-  //             border: Border.all(width: 1, color: const Color(0xffBBB7B7))),
-  //         child: DropdownButton(
-  //           icon:  const Icon(Icons.keyboard_arrow_down_outlined,
-  //               color: Color(0xffBBB7B7)),
-  //           iconSize: 36,
-  //           isExpanded: true,
-  //           underline: const SizedBox(),
-  //           style: TextStyle(
-  //             color: ColorConstant.blackColor,
-  //             fontSize: 17,
-  //           ),
-  //           value: selectedState,
-  //           onChanged: (newValue) {
-  //             setState(() {
-  //               selectedState = (newValue)!;
-  //               selectedDistrict=null;
-  //             });
-  //             final selectedStateId = stateCityViewModel
-  //                 .stateListModel!.data!
-  //                 .firstWhere((e) => e.name.toString() == (newValue))
-  //                 .id
-  //                 .toString();
-  //             stateCityViewModel.getDistrictApi(selectedStateId);
-  //           },
-  //           items:stateCityViewModel.stateListModel != null? stateCityViewModel.stateListModel!.data!
-  //               .map((valueItem) {
-  //             return DropdownMenuItem(
-  //               value: valueItem.name,
-  //               child: Text(
-  //                 valueItem.name!,
-  //               ),
-  //             );
-  //           }).toList():[],
-  //         ),
-  //       ),
-  //       AppConstant.spaceHeight10,
-  //       const TextContext(
-  //         data: "District *",
-  //         fontWeight: FontWeight.w500,
-  //         color: Color(0xff444343),
-  //         fontSize: 15,
-  //       ),
-  //       Container(
-  //         padding: const EdgeInsets.only(right: 5, left: 15),
-  //         // width: width / 2.3,
-  //         height: height * 0.058,
-  //         decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(5),
-  //             border: Border.all(width: 1, color: const Color(0xffBBB7B7))),
-  //         child: DropdownButton(
-  //           icon:  const Icon(Icons.keyboard_arrow_down_outlined,
-  //               color: Color(0xffBBB7B7)),
-  //           iconSize: 36,
-  //           isExpanded: true,
-  //           underline: const SizedBox(),
-  //           style: TextStyle(
-  //             color: ColorConstant.blackColor,
-  //             fontSize: 17,
-  //           ),
-  //           value: selectedDistrict,
-  //           onChanged: (newValue) {
-  //             setState(() {
-  //               selectedDistrict = (newValue)!;
-  //             });
-  //           },
-  //           items:stateCityViewModel.districtListModel != null? stateCityViewModel.districtListModel!.data!
-  //               .map((valueItem) {
-  //             return DropdownMenuItem(
-  //               value: valueItem.city,
-  //               child: Text(
-  //                 valueItem.city!,
-  //               ),
-  //             );
-  //           }).toList():[],
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   void _showSelectionBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         final items = Provider.of<ProfileViewModel>(context, listen: false)
-            .doctorDepartmentModelData?.data;
+            .doctorDepartmentModelData!.data;
 
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -764,18 +679,18 @@ class _ProfileState extends State<Profile> {
                 const Divider(color: Colors.grey, thickness: 1),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: items?.length??0,
+                    itemCount: items!.length,
                     itemBuilder: (context, index) {
-                      final item = items?[index];
+                      final item = items[index];
                       final isSelected = selectedNotRemoveVal.contains(item) ||
                           selectedValues.contains(item);
                       return ListTile(
                         leading: CircleAvatar(
-                          backgroundImage: item?.image != null
-                              ? NetworkImage(item?.image??"")
+                          backgroundImage: item.image != null
+                              ? NetworkImage(item.image??"")
                               : null,
                         ),
-                        title: Text(item?.name?.trim()??""),
+                        title: Text(item.name?.trim()??""),
                         trailing: Icon(
                           isSelected
                               ? Icons.check_box
@@ -791,7 +706,7 @@ class _ProfileState extends State<Profile> {
                             } else {
                               selectedNotRemoveVal.clear();
                               selectedValues.clear();
-                              // selectedValues.add(item??);
+                              selectedValues.add(item);
                             }
                           });
                           setState(() {});

@@ -26,40 +26,34 @@ class UpdateProfileViewModel with ChangeNotifier {
   Future<void> updateProfileApi(
       dynamic nameCon,
       dynamic emailCon,
-      dynamic address,
       dynamic qualificationNumber,
       dynamic expCon,
       dynamic feeCon,
       dynamic specialties,
       dynamic about,
-      dynamic city,
-      dynamic state,
       context) async {
     setLoading(true);
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
-
+print("Aman:$specialties");
     final documentVerifyViewModel =
         Provider.of<DocumentVerifyViewModel>(context, listen: false);
 
     Map data = {
-      "id": userId,
+      "userid": userId,
       "name": nameCon,
       "email": emailCon,
-      "address": address,
       "Qualification": qualificationNumber,
       "Exp": expCon,
       "fees": feeCon,
-      "specialties": specialties,
+    "profile":"Male",
+      "specialties": specialties.toString(),
       "about": about,
-      "profile": documentVerifyViewModel.idProfileImage,
-      "city":city,
-      "state":state
     };
 
-    print("data ${jsonEncode(data)}");
+    print("data ${data}");
     _updateProfileRepo.updateProfileApi(data).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoading(false);
 
         final profileViewModel =

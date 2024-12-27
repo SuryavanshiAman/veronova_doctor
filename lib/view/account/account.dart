@@ -193,7 +193,7 @@ class _AccountState extends State<Account> {
         ),
         backgroundColor: ColorConstant.whiteColor,
       ),
-      body: profileViewModel != null
+      body: profileViewModel == null
           ? Center(
               child: CircularProgressIndicator(
               color: ColorConstant.primaryColor,
@@ -227,10 +227,10 @@ class _AccountState extends State<Account> {
                                     padding: const EdgeInsets.only(bottom: 17),
                                     child: CircleAvatar(
                                       backgroundImage:
-                                          profileViewModel?.profile == null
+                                          profileViewModel.image == null
                                               ? AssetImage(
                                                   Assets.imgDoctor2.toString())
-                                              : NetworkImage(profileViewModel?.profile.toString()??""),
+                                              : NetworkImage(profileViewModel.image.toString()),
                                       radius: 40,
                                     ),
                                   ),
@@ -253,7 +253,7 @@ class _AccountState extends State<Account> {
                                       ),
                                       TextContext(
                                         data:
-                                            "Dr. ${profileViewModel?.name.toString()}",
+                                            "Dr. ${profileViewModel.name.toString()}",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 15,
                                         color: const Color(0xff1E1E1E),
@@ -264,7 +264,7 @@ class _AccountState extends State<Account> {
                                       ),
                                       TextContext(
                                           data:
-                                              "+91-${profileViewModel?.phone.toString()}",
+                                              "+91-${profileViewModel.mobile.toString()}",
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12,
                                           color: const Color(0xff979797),
@@ -272,9 +272,10 @@ class _AccountState extends State<Account> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      profileViewModel?.document.toString() ==
+                                      profileViewModel.documentstatus.toString() ==
                                               "2"
-                                          ? SizedBox(
+                                          ?
+                                      SizedBox(
                                               height: 20,
                                               child: Image.asset(
                                                 "assets/img/trangale.png",
@@ -299,23 +300,23 @@ class _AccountState extends State<Account> {
                                                             ColorConstant
                                                                 .greenColor,
                                                         activeColor:
-                                                            profileViewModel?.status
+                                                            profileViewModel.status
                                                                         .toString() ==
-                                                                    "0"
+                                                                    "1"
                                                                 ? ColorConstant
                                                                     .whiteColor
                                                                 : ColorConstant
                                                                     .whiteColor,
-                                                        value: profileViewModel?.status
-                                                                    .toString() ==
-                                                                "0"
+                                                        value:
+                                                        profileViewModel.status == 1
                                                             ? false
                                                             : true,
                                                         onChanged: (value) {
-                                                          if(profileViewModel?.document.toString() ==
-                                                              "2"
-                                                              ){
+                                                          print("😊😊😊$value");
+                                                          print( profileViewModel.status.toString());
+                                                          if(profileViewModel.documentstatus.toString() == "2"){
                                                             statusProvider.setIndexValue(value);
+                                                            print(statusProvider.indexValue);
                                                             statusProvider.updateStatusApi(context);
                                                           }else{
                                                            Utils.show("Action not allowed! verify your document to access", context);
@@ -325,15 +326,15 @@ class _AccountState extends State<Account> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      profileViewModel?.status
+                                                      profileViewModel.status
                                                                   .toString() ==
-                                                              "0"
+                                                              "1"
                                                           ? "Offline"
                                                           : "Online",
                                                       style: TextStyle(
-                                                        color: profileViewModel?.status
+                                                        color: profileViewModel.status
                                                                     .toString() ==
-                                                                "0"
+                                                                "1"
                                                             ? ColorConstant
                                                                 .redColor
                                                             : ColorConstant
@@ -357,7 +358,7 @@ class _AccountState extends State<Account> {
                           top: height * 0.010,
                           child: Icon(
                             Icons.check_circle_rounded,
-                            color: profileViewModel?.document.toString() == "2"
+                            color: profileViewModel.documentstatus.toString() == "2"
                                 ? ColorConstant.primaryColor
                                 : const Color(0xffD1CDCD),
                           ),

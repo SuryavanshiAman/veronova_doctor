@@ -103,21 +103,21 @@ class _DocumentState extends State<Document> {
                   MaterialPageRoute(
                     builder: (context) => FullScreenImage(
                       imageUrls: [
-                        profileViewModel?.proofId ?? "",
+                        profileViewModel.proofId ?? "",
                       ],
                     ),
                   ),
                 );
               },
-              // child: Container(
-              //   height: height/2.8,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: NetworkImage(profileViewModel!.proofId ?? ""),
-              //       fit: BoxFit.fitWidth,
-              //     ),
-              //   ),
-              // ),
+              child: Container(
+                height: height/2.8,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(profileViewModel!.proofId ?? ""),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ),
             ),
             AppConstant.spaceHeight10,
             const TextContext(
