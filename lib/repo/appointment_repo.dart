@@ -16,7 +16,7 @@ class AppointmentRepo {
   Future<CurrentAppointmentsModel> currentAppointmentApi(dynamic data) async {
     try {
       dynamic response =
-      await _apiServices.getGetApiResponse(ApiUrl.currentAppointmentUrl + data);
+      await _apiServices.getPostApiResponse(ApiUrl.currentAppointmentUrl, data);
       return CurrentAppointmentsModel.fromJson(response);
     } catch (e) {
       if (kDebugMode) {

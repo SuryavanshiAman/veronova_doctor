@@ -49,25 +49,23 @@ TextEditingController meetingCont =TextEditingController();
             builder: (context, appointmentViewModel, child) {
           if (appointmentViewModel.currentAppointmentsModel == null ||
               appointmentViewModel
-                  .currentAppointmentsModel!.currentAppointmentsData!.isEmpty) {
+                  .currentAppointmentsModel!.data!.isEmpty) {
             return noDataAvl();
           }
           return ListView.builder(
               shrinkWrap: true,
               itemCount: appointmentViewModel
-                  .currentAppointmentsModel!.currentAppointmentsData!.length,
+                  .currentAppointmentsModel!.data!.length,
               itemBuilder: (context, index) {
                 final appointmentData = appointmentViewModel
                     .currentAppointmentsModel!
-                    .currentAppointmentsData![index];
+                    .data![index];
                 return Container(
                   padding: const EdgeInsets.symmetric(vertical: 18),
                   margin: EdgeInsets.only(
                       top: 10,
-                      bottom: index ==
-                              appointmentViewModel.currentAppointmentsModel!
-                                      .currentAppointmentsData!.length -
-                                  1
+                      bottom: index == appointmentViewModel.currentAppointmentsModel!
+                                      .data!.length - 1
                           ? 10
                           : 0),
                   color: ColorConstant.whiteColor,
@@ -92,9 +90,7 @@ TextEditingController meetingCont =TextEditingController();
                                       fontFamily: "poppins_reg",
                                       fontWeight: FontWeight.w400)),
                               TextSpan(
-                                  text: appointmentViewModel
-                                      .currentAppointmentsModel!
-                                      .currentAppointmentsData![index]
+                                  text:appointmentData
                                       .id
                                       .toString(),
                                   style: const TextStyle(
@@ -143,14 +139,12 @@ TextEditingController meetingCont =TextEditingController();
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              appointmentInfo("Name", appointmentData.patientName),
-                              appointmentInfo("Phone", appointmentData.phone.toString()),
-                              appointmentInfo("Patient Age", appointmentData.age.toString()),
-                              appointmentInfo("Requested Time", "${DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}, ${appointmentData.sTime}"),
-                              appointmentInfo("Payment Mode", appointmentData.status ==
-                                  "0"
-                                  ? "Online Payment"
-                                  : "Offline Payment",),
+                              appointmentInfo("Name", appointmentData.name),
+                              appointmentInfo("Phone", appointmentData.mobile.toString()),
+                              appointmentInfo("Patient Age", appointmentData.patientAge.toString()),
+                              appointmentInfo("Patient Gender", appointmentData.patientGender.toString()),
+                              appointmentInfo("Requested Time", "${DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.updatedAt))}"),
+                              appointmentInfo("Payment Mode",  "Online Payment",),
                               appointmentInfo("Meeting Time","22/14/24 5:00 pm"),
                             ],
                           )
@@ -194,8 +188,8 @@ TextEditingController meetingCont =TextEditingController();
                             TextContext(
                                 data: appointmentViewModel
                                     .currentAppointmentsModel!
-                                    .currentAppointmentsData![index]
-                                    .address
+                                    .data![index]
+                                    .name
                                     .toString(),
                                 fontSize: 14,
                                 color: const Color(0xff979797),
@@ -220,7 +214,7 @@ TextEditingController meetingCont =TextEditingController();
                               data: " ₹ ",
                             ),
                             TextContext(
-                                data:appointmentViewModel.currentAppointmentsModel!.currentAppointmentsData![index].fees.toString(),
+                                data:appointmentViewModel.currentAppointmentsModel!.data![index].doctorFees.toString(),
                                 fontSize: 14,
                                 color: const Color(0xff000000),
                                 fontFamily: "poppins_reg",
@@ -351,12 +345,12 @@ TextEditingController meetingCont =TextEditingController();
                         ),
                         width: width,
                         child: appointmentViewModel.currentAppointmentsModel!
-                                    .currentAppointmentsData![index].status
+                                    .data![index].status
                                     .toString() ==
                                 "0"
                             ? acceptRejectButton(appointmentViewModel
                                 .currentAppointmentsModel!
-                                .currentAppointmentsData![index]
+                                .data![index]
                                 .id
                                 .toString())
                             : Row(
@@ -365,7 +359,7 @@ TextEditingController meetingCont =TextEditingController();
                                 children: [
                                   appointmentViewModel
                                               .currentAppointmentsModel!
-                                              .currentAppointmentsData![index]
+                                              .data![index]
                                               .status
                                               .toString() ==
                                           "1"
@@ -374,7 +368,7 @@ TextEditingController meetingCont =TextEditingController();
                                             documentVerifyViewModel.statusUpdateApi(
                                                 appointmentViewModel
                                                     .currentAppointmentsModel!
-                                                    .currentAppointmentsData![
+                                                    .data![
                                                         index]
                                                     .id
                                                     .toString(),
@@ -383,7 +377,7 @@ TextEditingController meetingCont =TextEditingController();
                                           },
                                           child:documentVerifyViewModel.loadingUpdate && documentVerifyViewModel.selectedIndexAppointmentId.toString() ==  appointmentViewModel
                                               .currentAppointmentsModel!
-                                              .currentAppointmentsData![
+                                              .data![
                                           index]
                                               .id.toString()?  Container(
                                               alignment: Alignment.center,
@@ -415,8 +409,8 @@ TextEditingController meetingCont =TextEditingController();
                                     onTap: (){
                                       MakeCall.openDialPad(appointmentViewModel
                                           .currentAppointmentsModel!
-                                          .currentAppointmentsData![
-                                      index].phone.toString());
+                                          .data![
+                                      index].mobile.toString());
                                     },
                                     child: Container(
                                         decoration: BoxDecoration(

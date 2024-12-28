@@ -10,11 +10,11 @@ class ApiUrl {
   static const doctorViewReviewUrl = "${baseUrl}doctor_view/";
   static const documentVerifyUrl = "${baseUrl}document_verify";
   static const updateStatusUrl = "${baseUrl}update_doctor_status";
-  static const slotUrl = "${baseUrl}slot";
-  static const currentAppointmentUrl = "${baseUrl}current_appointment/";
-  static const statusUpdateUrl = "${baseUrl}status_update";
+  static const createSlotUrl = "${baseUrl}create/slot";
+  static const currentAppointmentUrl = "${baseUrl}get/appointment";
+  static const appointmentStatusUpdateUrl = "${baseUrl}appointment-status";
   static const updateProfileUrl = "${baseUrl}update/profile";
-  static const slotViewUrl = "${baseUrl}slot_view/";
+  static const slotViewUrl = "${baseUrl}get/slots";
   static const slotDeleteUrl = "${baseUrl}slot_delete";
   static const bankDetailUrl = "${baseUrl}bank_detail";
   static const helpUrl = "${baseUrl}help";

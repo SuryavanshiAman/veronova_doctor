@@ -171,13 +171,13 @@ class DocumentVerifyViewModel with ChangeNotifier {
     String? userId = await userViewModel.getUser();
 
     Map data = {
-      "id": appointmentId,
-      "doctor_id": userId,
+      "appointmentid": appointmentId,
+      "doc_id": userId,
       "status": status,
     };
     print(data);
     _documentVerifyRepo.statusUpdateApi(data).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoadingUpdate(false);
         final appointmentViewModel =
             Provider.of<AppointmentViewModel>(context, listen: false);

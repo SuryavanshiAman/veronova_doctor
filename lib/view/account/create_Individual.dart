@@ -68,7 +68,7 @@ class _CreateIndividualState extends State<CreateIndividual> {
           AppConstant.spaceHeight10,
           weekDayUi(),
           AppConstant.spaceHeight5,
-          slotBookModelUi(),
+          // slotBookModelUi(),
           SizedBox(
             height: height * 0.08,
           ),
@@ -110,7 +110,7 @@ class _CreateIndividualState extends State<CreateIndividual> {
             padding: const EdgeInsets.only(left: 15, top: 10),
             child: const TextContext(
               data: "Select Weekday",
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               color: Color(0xff444343),
               fontSize: 14,
             ),
@@ -168,198 +168,32 @@ class _CreateIndividualState extends State<CreateIndividual> {
     );
   }
 
-  Widget slotBookModelUi() {
-    final slotProvider = Provider.of<SlotViewModel>(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      color: Colors.white,
-      margin: const EdgeInsets.only(bottom: 5, top: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextContext(
-              data: "Select Date",
-              fontWeight: FontWeight.w500,
-              color: const Color(0xff000000),
-              fontSize: 14,
-              fontFamily: "poppins_reg"),
-          SizedBox(height: 10,),
-          DobWidget(
-            controller: dotCont,
-            initialDate: selectedDate,
-            onDateSelected: _handleDateSelected,
-          ),
-          // ListTile(
-          //   contentPadding: const EdgeInsets.all(0),
-          //   leading: Image.asset(
-          //     data["img"],
-          //     width: 20,
-          //     color: const Color(0xff9F9F9F),
-          //     height: 20,
-          //   ),
-          //   title: GestureDetector(
-          //     onTap: () {
-          //       slotProvider.setSlotTypeTime(i);
-          //     },
-          //     child: Row(
-          //       children: [
-          //         TextContext(
-          //             data: data["title"],
-          //             fontWeight: FontWeight.w500,
-          //             color: const Color(0xff000000),
-          //             fontSize: 14,
-          //             fontFamily: "poppins_reg"),
-          //         AppConstant.spaceWidth10,
-          //         Image.asset(data["rightImg"],
-          //             width: 20,
-          //             color: data["isChecked"] == false
-          //                 ? const Color(0xffD1CDCD)
-          //                 : const Color(0xff229505))
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // const TextContext(
-          //   data: "Time",
-          //   fontWeight: FontWeight.w400,
-          //   color: Color(0xff000000),
-          //   fontFamily: "poppins_reg",
-          //   fontSize: 12,
-          // ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     GestureDetector(
-          //       onTap: () =>
-          //           slotProvider.selectTime(context, i, "start_time"),
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(5),
-          //           border: Border.all(
-          //               width: 1, color: const Color(0xffD1CDCD)),
-          //         ),
-          //         padding: const EdgeInsets.symmetric(horizontal: 10),
-          //         height: height * 0.040,
-          //         width: width * 0.35,
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //           children: [
-          //             Text(
-          //               "${data["start_time"]}",
-          //               style: const TextStyle(
-          //                 fontWeight: FontWeight.w400,
-          //                 color: Color(0xff444343),
-          //                 fontFamily: "poppins_reg",
-          //                 fontSize: 12,
-          //               ),
-          //             ),
-          //             Image.asset(
-          //               data["imgTime"],
-          //               height: height * 0.025,
-          //               width: height * 0.025,
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //     GestureDetector(
-          //       onTap: () =>
-          //           slotProvider.selectTime(context, i, "end_time"),
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(5),
-          //           border: Border.all(
-          //               width: 1, color: const Color(0xffD1CDCD)),
-          //         ),
-          //         padding: const EdgeInsets.symmetric(horizontal: 10),
-          //         height: height * 0.040,
-          //         width: width * 0.35,
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //           children: [
-          //             Text(
-          //               "${data["end_time"]}",
-          //               style: const TextStyle(
-          //                   color: Color(0xff444343),
-          //                   fontFamily: "poppins_reg",
-          //                   fontSize: 12,
-          //                   fontWeight: FontWeight.w400),
-          //             ),
-          //             Image.asset(
-          //               data["imgTime"],
-          //               height: height * 0.025,
-          //               width: height * 0.025,
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(
-          //   height: height * 0.020,
-          // ),
-          // const TextContext(
-          //   data: "Slot Duration :",
-          //   fontWeight: FontWeight.w500,
-          //   fontFamily: "poppins_reg",
-          //   color: Color(0xff000000),
-          //   fontSize: 14,
-          // ),
-          // GridView.builder(
-          //   shrinkWrap: true,
-          //   physics: const NeverScrollableScrollPhysics(),
-          //   itemCount: data["slotDuration"].length,
-          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: 3,
-          //     childAspectRatio: (width / 2) / (height * 0.1),
-          //     mainAxisSpacing: height * 0.01,
-          //     crossAxisSpacing: width * 0.11,
-          //   ),
-          //   itemBuilder: (BuildContext context, int index) {
-          //     final slotData = data["slotDuration"][index];
-          //     return GestureDetector(
-          //       onTap: () {
-          //         if (data["isChecked"]) {
-          //           setState(() {
-          //             // Deselect all items
-          //             for (var item in data["slotDuration"]) {
-          //               item["isSelect"] = false;
-          //             }
-          //             // Select the tapped item
-          //             slotData["isSelect"] = true;
-          //           });
-          //         } else {
-          //           Utils.show("Please Select Slot", context);
-          //         }
-          //       },
-          //       child: Row(
-          //         children: [
-          //           Image.asset(
-          //             "assets/icon/right.png",
-          //             width: 20,
-          //             color: slotData["isSelect"] == false
-          //                 ? const Color(0xffD1CDCD)
-          //                 : ColorConstant.primaryColor,
-          //           ),
-          //           AppConstant.spaceWidth10,
-          //           Text(
-          //             "${slotData["duration"]} min",
-          //             style: const TextStyle(
-          //                 fontWeight: FontWeight.w400,
-          //                 color: Color(0xff1E1E1E),
-          //                 fontSize: 13,
-          //                 fontFamily: "poppins_reg"),
-          //           )
-          //         ],
-          //       ),
-          //     );
-          //   },
-          // ),
-        ],
-      ),
-    );
-  }
+  // Widget slotBookModelUi() {
+  //   final slotProvider = Provider.of<SlotViewModel>(context);
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(horizontal: 15),
+  //     color: Colors.white,
+  //     margin: const EdgeInsets.only(bottom: 5, top: 5),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         TextContext(
+  //             data: "Select Date",
+  //             fontWeight: FontWeight.w500,
+  //             color: const Color(0xff000000),
+  //             fontSize: 14,
+  //             fontFamily: "poppins_reg"),
+  //         SizedBox(height: 10,),
+  //         DobWidget(
+  //           controller: dotCont,
+  //           initialDate: selectedDate,
+  //           onDateSelected: _handleDateSelected,
+  //         ),
+  //
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget generateSlotButton() {
     final slotProvider = Provider.of<SlotViewModel>(context);
@@ -370,43 +204,15 @@ class _CreateIndividualState extends State<CreateIndividual> {
         String? userId = await userViewModel.getUser();
         setState(() {
           slotProvider.selectedSlotsData = [];
-          for (var scheduleData in slotProvider.individualDaySchedule) {
-            if (scheduleData["isChecked"] == true) {
-              for (var selectedScheduleData in scheduleData["slotDuration"]) {
-                if (selectedScheduleData["isSelect"] == true) {
-                  slotProvider.selectedSlotsData.add({
-                    "slot_type": scheduleData["type_id"],
-                    "s_time": scheduleData["start_time"],
-                    "e_time": scheduleData["end_time"],
-                    "s_duration": selectedScheduleData["duration"]
-                  });
-                } else {
-                  debugPrint(
-                      "no time slot selected for ${scheduleData['title']}");
-                }
-              }
-            } else {
-              debugPrint("it is not selected");
-            }
-          }
-          // print("selected slot detail: ${slotProvider.selectedSlotsData}");
           if (kDebugMode) {
             print(
                 "selected slot detail: ${jsonEncode(slotProvider.selectedSlotsData)}");
           }
           final completeSlotDataFormat = {
             "doctor_id": userId,
-            "slot_type_id": " 1",
-            "week_day":
-                slotProvider.weekend[currentIndex].toString().toLowerCase(),
-            "slot_data": slotProvider.selectedSlotsData
+            "week_day": slotProvider.weekend[currentIndex].toString().toLowerCase(),
           };
-          debugPrint("all encoded data: ${jsonEncode(completeSlotDataFormat)}");
-
-          debugPrint(
-              "all selectedSlotsData data: ${slotProvider.selectedSlotsData}");
-
-          if (slotProvider.selectedSlotsData.isEmpty) {
+          if (slotProvider.weekend[currentIndex].isEmpty) {
             Utils.show("Please Select Slot", context);
           } else {
             slotProvider.slotApi(context, completeSlotDataFormat);
@@ -416,7 +222,6 @@ class _CreateIndividualState extends State<CreateIndividual> {
       color: ColorConstant.primaryColor,
       alignment: Alignment.center,
       label: "Generate Slots",
-      // textColor: ColorConstant.whiteColor,
       fontSize: 18,
       width: width,
       height: height * 0.060,

@@ -1,141 +1,101 @@
 class CurrentAppointmentsModel {
-  int? status;
-  String? message;
-  List<CurrentAppointmentsData>? currentAppointmentsData;
+  List<Data>? data;
+  String? msg;
+  String? status;
 
-  CurrentAppointmentsModel({this.status, this.message, this.currentAppointmentsData});
+  CurrentAppointmentsModel({this.data, this.msg, this.status});
 
   CurrentAppointmentsModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
     if (json['data'] != null) {
-      currentAppointmentsData = <CurrentAppointmentsData>[];
+      data = <Data>[];
       json['data'].forEach((v) {
-        currentAppointmentsData!.add(CurrentAppointmentsData.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
+    msg = json['msg'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    if (currentAppointmentsData != null) {
-      data['data'] = currentAppointmentsData!.map((v) => v.toJson()).toList();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
+    data['msg'] = msg;
+    data['status'] = status;
     return data;
   }
 }
 
-class CurrentAppointmentsData {
-  int? id;
-  dynamic doctorId;
-  dynamic slotId;
+class Data {
+  dynamic id;
+  dynamic docId;
   dynamic userId;
   dynamic status;
-  dynamic paymode;
-  dynamic sTime;
-  dynamic eTime;
-  dynamic weekday;
-  dynamic date;
-  dynamic hospitalId;
-  dynamic slot;
-  dynamic doctorName;
-  dynamic userName;
-  dynamic amount;
-  dynamic slotType;
-  dynamic age;
-  dynamic address;
-  dynamic phone;
-  dynamic patientName;
-  dynamic totalPayable;
-  dynamic payable;
+  dynamic updatedAt;
   dynamic name;
-  dynamic gender;
-  dynamic fees;
+  dynamic mobile;
+  dynamic email;
+  dynamic expertsId;
+  dynamic slotsId;
+  dynamic weekDay;
+  dynamic patientAge;
+  dynamic patientImage;
+  dynamic patientGender;
+  dynamic doctorFees;
 
-  CurrentAppointmentsData(
+  Data(
       {this.id,
-        this.doctorId,
-        this.slotId,
+        this.docId,
         this.userId,
         this.status,
-        this.paymode,
-        this.sTime,
-        this.eTime,
-        this.weekday,
-        this.date,
-        this.hospitalId,
-        this.slot,
-        this.doctorName,
-        this.userName,
-        this.amount,
-        this.slotType,
-        this.age,
-        this.address,
-        this.phone,
-        this.patientName,
-        this.totalPayable,
-        this.payable,
+        this.updatedAt,
         this.name,
-        this.gender,
-        this.fees});
+        this.mobile,
+        this.email,
+        this.expertsId,
+        this.slotsId,
+        this.weekDay,
+        this.patientAge,
+        this.patientImage,
+        this.patientGender,
+        this.doctorFees});
 
-  CurrentAppointmentsData.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    doctorId = json['doctor_id'];
-    slotId = json['slot_id'];
+    docId = json['doc_id'];
     userId = json['user_id'];
     status = json['status'];
-    paymode = json['paymode'];
-    sTime = json['s_time'];
-    eTime = json['e_time'];
-    weekday = json['weekday'];
-    date = json['date'];
-    hospitalId = json['hospital_id'];
-    slot = json['slot'];
-    doctorName = json['doctor_name'];
-    userName = json['user_name'];
-    amount = json['amount'];
-    slotType = json['slot_type'];
-    age = json['age'];
-    address = json['address'];
-    phone = json['phone'];
-    patientName = json['patient_name'];
-    totalPayable = json['total_payable'];
-    payable = json['payable'];
+    updatedAt = json['updated_at'];
     name = json['name'];
-    gender = json['gender'];
-    fees = json['fees'];
+    mobile = json['mobile'];
+    email = json['email'];
+    expertsId = json['experts_id'];
+    slotsId = json['slots_id'];
+    weekDay = json['week_day'];
+    patientAge = json['patient_age'];
+    patientImage = json['patient_image'];
+    patientGender = json['patient_gender'];
+    doctorFees = json['doctor_fees'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['doctor_id'] = doctorId;
-    data['slot_id'] = slotId;
+    data['doc_id'] = docId;
     data['user_id'] = userId;
     data['status'] = status;
-    data['paymode'] = paymode;
-    data['s_time'] = sTime;
-    data['e_time'] = eTime;
-    data['weekday'] = weekday;
-    data['date'] = date;
-    data['hospital_id'] = hospitalId;
-    data['slot'] = slot;
-    data['doctor_name'] = doctorName;
-    data['user_name'] = userName;
-    data['amount'] = amount;
-    data['slot_type'] = slotType;
-    data['age'] = age;
-    data['address'] = address;
-    data['phone'] = phone;
-    data['patient_name'] = patientName;
-    data['total_payable'] = totalPayable;
-    data['payable'] = payable;
+    data['updated_at'] = updatedAt;
     data['name'] = name;
-    data['gender'] = gender;
-    data['fees'] = fees;
+    data['mobile'] = mobile;
+    data['email'] = email;
+    data['experts_id'] = expertsId;
+    data['slots_id'] = slotsId;
+    data['week_day'] = weekDay;
+    data['patient_age'] = patientAge;
+    data['patient_image'] = patientImage;
+    data['patient_gender'] = patientGender;
+    data['doctor_fees'] = doctorFees;
     return data;
   }
 }

@@ -1,15 +1,15 @@
 import 'package:doctor_apk/model/current_appointment_model.dart';
+import 'package:doctor_apk/model/view_slot_model.dart';
 
 import 'package:doctor_apk/repo/appointment_repo.dart';
+import 'package:doctor_apk/repo/view_slot_repo.dart';
 
 import 'package:doctor_apk/view_model/user_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class AppointmentViewModel with ChangeNotifier {
-  final _appointmentRepo = AppointmentRepo();
-
-  // Current Appointment
+class ViewSlotViewModel with ChangeNotifier {
+  final _viewSlot = ViewSlotRepo();
 
   bool _loading = false;
 
@@ -20,27 +20,27 @@ class AppointmentViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  CurrentAppointmentsModel? _currentAppointmentsModel;
-  CurrentAppointmentsModel? get currentAppointmentsModel =>
-      _currentAppointmentsModel;
+  ViewSlotModel? _viewSlotModel;
+  ViewSlotModel? get viewSlotModelData =>
+      _viewSlotModel;
 
-  void setCurrentAppointmentsModel(CurrentAppointmentsModel name) {
-    _currentAppointmentsModel = name;
+  void setViewSlotModel(ViewSlotModel name) {
+    _viewSlotModel = name;
     notifyListeners();
   }
 
-  Future<void> currentAppointmentApi(context) async {
+  Future<void> viewSlot(context) async {
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
     print("hiieiei $userId");
     Map data={
-      "doc_id":userId
+      "doctor_id":userId
     };
-    _appointmentRepo.currentAppointmentApi(data).then((value) {
+    _viewSlot.viewSlot(data).then((value) {
       if (value.status == "200") {
-        setCurrentAppointmentsModel(value);
+        setViewSlotModel(value);
       } else {
-        setCurrentAppointmentsModel(value);
+        setViewSlotModel(value);
         if (kDebugMode) {
           print('value: ${value.msg}');
         }

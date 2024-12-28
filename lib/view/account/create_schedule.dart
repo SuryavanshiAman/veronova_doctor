@@ -1,5 +1,4 @@
 import 'package:doctor_apk/res/app_constant.dart';
-import 'package:doctor_apk/view/account/common_day.dart';
 import 'package:doctor_apk/view/account/create_Individual.dart';
 import 'package:doctor_apk/view/account/view_created_schedules.dart';
 import 'package:doctor_apk/view_model/slot_view_model.dart';
@@ -47,12 +46,8 @@ class _CreateScheduleState extends State<CreateSchedule> {
               "Create Individual Day Schedule",
               "Create Individual schedule for each day",
               const CreateIndividual()),
-          buttonTile("Create Common Day Schedule",
-              "Create common schedule for all weekday", const CreateCommonDaySchedule()),
           buttonTile("See", "See Individual schedule for each day",
               const SeeBookedAppointment() ,isAllowDarkBorder: true, slotType: "1"),
-          buttonTile(
-              "See", "See common schedule for all weekday", const SeeBookedAppointment(), isAllowDarkBorder: true, slotType: "2")
         ],
       ),
     );

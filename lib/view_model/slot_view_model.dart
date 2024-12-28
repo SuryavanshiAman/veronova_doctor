@@ -239,9 +239,9 @@ class SlotViewModel with ChangeNotifier {
   Future<void> slotApi(context, dynamic dataCon) async {
     setLoading(true);
     _slotRepo.slotApi(dataCon).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoading(false);
-        Utils.show(value['message'], context);
+        Utils.show(value['msg'], context);
         Navigator.pop(context);
       } else {
         setLoading(false);

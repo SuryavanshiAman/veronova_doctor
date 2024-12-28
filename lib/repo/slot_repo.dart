@@ -14,7 +14,7 @@ class SlotRepo {
   Future<dynamic> slotApi(dynamic data) async {
     try {
       dynamic response =
-          await _apiServices.getPostApiResponse(ApiUrl.slotUrl, data);
+          await _apiServices.getPostApiResponse(ApiUrl.createSlotUrl, data);
       return response;
     } catch (e) {
       if (kDebugMode) {

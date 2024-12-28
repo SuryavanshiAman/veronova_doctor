@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 import 'view_model/all_policies_view_model.dart';
 import 'view_model/appointment_view_model.dart';
 import 'view_model/document_verify_view_model.dart';
+import 'view_model/view_slot_view_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -100,6 +101,7 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (context) => HelpViewModel()),
               ChangeNotifierProvider(create: (context) => StateCityViewModel()),
               ChangeNotifierProvider(create: (context) => AllPoliciesViewModel()),
+              ChangeNotifierProvider(create: (context) => ViewSlotViewModel()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

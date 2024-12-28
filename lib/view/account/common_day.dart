@@ -187,10 +187,9 @@ class _CreateCommonDayScheduleState extends State<CreateCommonDaySchedule> {
 
             final completeSlotDataFormat = {
               "doctor_id": userId,
-              "slot_type_id": "2",
               "week_day":
                   selectedIndexes.map((day) => day.toLowerCase()).join(','),
-              "slot_data": slotProvider.selectedSlotsData
+              // "slot_data": slotProvider.selectedSlotsData
             };
             print("all encoded data: ${jsonEncode(completeSlotDataFormat)}");
 
