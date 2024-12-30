@@ -18,7 +18,7 @@ class _PolicyState extends State<Policy> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<AllPoliciesViewModel>(context).allPoliciesApi(context,"2");
+    Provider.of<AllPoliciesViewModel>(context,listen: false).allPoliciesApi(context,"2");
   }
   @override
   Widget build(BuildContext context) {

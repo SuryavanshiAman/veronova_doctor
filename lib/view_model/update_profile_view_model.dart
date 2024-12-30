@@ -49,6 +49,7 @@ print("Aman:$specialties");
     "profile":"Male",
       "specialties": specialties.toString(),
       "about": about,
+      "profile_pic":base64Decode(documentVerifyViewModel.idProfileImage!)
     };
 
     print("data ${data}");

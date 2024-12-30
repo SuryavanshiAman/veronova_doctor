@@ -22,7 +22,6 @@ class _HealthCradButtonState extends State<HealthCradButton> {
   final screenList = [
     const HomeHealthCard(),
     const History(),
-    // const Review(),
     const Account(),
   ];
 

@@ -27,24 +27,25 @@ class DoctorViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> doctorHistoryApi(dynamic filterId,int status, context) async {
+  Future<void> doctorHistoryApi(dynamic filterId,dynamic status, context) async {
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
     Map data = {
-      "doctor_id": userId,
-      "filter": filterId,
+      "doc_id":userId,
+      "status":filterId,
     };
     print("=> $data");
     _doctorRepo.doctorHistoryApi(data).then((value) {
-      if (value.status == 200) {
+      if (value.status == "200") {
         setDoctorHistoryModel(value);
-       if (status == 1){
-         Navigator.pop(context);
-       }
+       // if (status == 1){
+       //   Navigator.pop(context);
+       // }
       } else {
-        setDoctorHistoryModel(DoctorHistoryModel(doctorHistoryData: null, status: 400, message: "not found"));
+        setDoctorHistoryModel(value);
+        // setDoctorHistoryModel(DoctorHistoryModel(data: null, status: "400", msg: "not found"));
         if (kDebugMode) {
-          print('value: ${value.message}');
+          print('value: ${value.msg}');
         }
       }
     }).onError((error, stackTrace) {

@@ -17,7 +17,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import 'view_model/all_policies_view_model.dart';
 import 'view_model/appointment_view_model.dart';
 import 'view_model/document_verify_view_model.dart';

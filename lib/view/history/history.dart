@@ -26,9 +26,7 @@ class _HistoryState extends State<History> {
   @override
   void initState() {
     super.initState();
-    final doctorViewModel =
-        Provider.of<DoctorViewModel>(context, listen: false);
-    doctorViewModel.doctorHistoryApi("", 0, context);
+  Provider.of<DoctorViewModel>(context, listen: false).doctorHistoryApi(5, 0, context);
   }
 
   @override
@@ -112,7 +110,7 @@ class _HistoryState extends State<History> {
               child: CircularProgressIndicator(
               color: ColorConstant.primaryColor,
             ))
-          : doctorViewModel.doctorHistoryModel!.status == 400
+          : doctorViewModel.doctorHistoryModel!.status == "400"
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -150,14 +148,16 @@ class _HistoryState extends State<History> {
               : RefreshIndicator(
                   onRefresh: () async {
                     await Provider.of<DoctorViewModel>(context, listen: false)
-                        .doctorHistoryApi("", 0, context);
+                        .doctorHistoryApi(5, 0, context);
                   },
                   child: ListView.builder(
                     padding:const EdgeInsets.only(bottom: 15) ,
                       shrinkWrap: true,
                       itemCount: doctorViewModel
-                          .doctorHistoryModel!.doctorHistoryData!.length,
+                          .doctorHistoryModel!.data!.length,
                       itemBuilder: (context, index) {
+                      final data =doctorViewModel
+                          .doctorHistoryModel!.data![index];
                         return Container(
                             margin: EdgeInsets.fromLTRB(
                                 0, height * 0.015, 0, index == 4 ? 10 : 0),
@@ -186,9 +186,7 @@ class _HistoryState extends State<History> {
                                               color: Color(0xff1E1E1E),
                                             )),
                                         TextSpan(
-                                            text: doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
+                                            text: data
                                                 .id
                                                 .toString(),
                                             style: const TextStyle(
@@ -307,10 +305,8 @@ class _HistoryState extends State<History> {
                                           TextContext(
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
-                                            data: doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
-                                                .patientName
+                                            data: data
+                                                .name
                                                 .toString(),
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
@@ -319,10 +315,8 @@ class _HistoryState extends State<History> {
                                           ),
                                           TextContext(
                                             maxLines: 1,
-                                            data: doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
-                                                .phone
+                                            data: data
+                                                .mobile
                                                 .toString(),
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
@@ -332,10 +326,8 @@ class _HistoryState extends State<History> {
                                           Row(
                                             children: [
                                               TextContext(
-                                                data: doctorViewModel
-                                                    .doctorHistoryModel!
-                                                    .doctorHistoryData![index]
-                                                    .age
+                                                data: data
+                                                    .patientAge
                                                     .toString(),
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -354,7 +346,7 @@ class _HistoryState extends State<History> {
                                           TextContext(
                                             maxLines: 1,
                                             data:
-                                                "${DateFormat('EE, dd MMM').format(DateTime.parse(doctorViewModel.doctorHistoryModel!.doctorHistoryData![index].date))}, ${doctorViewModel.doctorHistoryModel!.doctorHistoryData![index].sTime}",
+                                                "${DateFormat('EE, dd MMM').format(DateTime.parse(data.updatedAt.toString()))},",
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "poppins_reg",
@@ -362,10 +354,7 @@ class _HistoryState extends State<History> {
                                           ),
                                           TextContext(
                                             maxLines: 1,
-                                            data:doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
-                                                .paymode==0?"Offline":"Online",
+                                            data:"Offline",
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: "poppins_reg",
@@ -393,28 +382,28 @@ class _HistoryState extends State<History> {
                                   SizedBox(
                                     height: height * 0.010,
                                   ),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/icon/map.png",
-                                        scale: 5,
-                                      ),
-                                      SizedBox(
-                                        width: width * 0.02,
-                                      ),
-                                      TextContext(
-                                        data: doctorViewModel
-                                            .doctorHistoryModel!
-                                            .doctorHistoryData![index]
-                                            .address
-                                            .toString(),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: "poppins_reg",
-                                        color: const Color(0xff979797),
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Image.asset(
+                                  //       "assets/icon/map.png",
+                                  //       scale: 5,
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: width * 0.02,
+                                  //     ),
+                                  //     TextContext(
+                                  //       data: doctorViewModel
+                                  //           .doctorHistoryModel!
+                                  //           .doctorHistoryData![index]
+                                  //           .address
+                                  //           .toString(),
+                                  //       fontSize: 14,
+                                  //       fontWeight: FontWeight.w400,
+                                  //       fontFamily: "poppins_reg",
+                                  //       color: const Color(0xff979797),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                   Row(
                                     children: [
                                       Container(
@@ -430,10 +419,8 @@ class _HistoryState extends State<History> {
                                         data: " ₹ ",
                                       ),
                                       TextContext(
-                                        data: doctorViewModel
-                                            .doctorHistoryModel!
-                                            .doctorHistoryData![index]
-                                            .fees
+                                        data: data
+                                            .doctorFees
                                             .toString(),
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -491,16 +478,11 @@ class _HistoryState extends State<History> {
                                         //   ),
                                         // ),
                                         statusButton(
-                                            status: doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
-                                                .status),
+                                            status: int.parse(data.status.toString())),
                                         InkWell(
                                           onTap: () {
-                                            MakeCall.openDialPad(doctorViewModel
-                                                .doctorHistoryModel!
-                                                .doctorHistoryData![index]
-                                                .phone
+                                            MakeCall.openDialPad(data
+                                                .mobile
                                                 .toString());
                                           },
                                           child: Container(
@@ -551,7 +533,7 @@ class _HistoryState extends State<History> {
     required int status,
   }) {
     Color contentColor =
-        status == 2 ? ColorConstant.greenColor : ColorConstant.redColor;
+        status == 2 ? ColorConstant.greenColor :status == 1 ?ColorConstant.orangeColor: ColorConstant.redColor;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
@@ -573,7 +555,7 @@ class _HistoryState extends State<History> {
                 ? "Rejected"
                 : status == 4
                     ? "Canceled"
-                    : "",
+                    : "Accept",
         color: contentColor,
       ),
     );

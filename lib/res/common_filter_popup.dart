@@ -61,13 +61,13 @@ class _CommonFilterPopupState extends State<CommonFilterPopup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                buildFilterContainer("Rejected", 1,height*0.05,width*0.3),
+                buildFilterContainer("Rejected", 3,height*0.05,width*0.3),
                 const SizedBox(width: 10),
-                buildFilterContainer("Cancelled", 2,height*0.05,width*0.3),
+                buildFilterContainer("Cancelled", 4,height*0.05,width*0.3),
               ],
             ),
             const SizedBox(height: 15),
-            buildFilterContainer("Consultancy Done", 3,height*0.05,width*0.45),
+            buildFilterContainer("Consultancy Done", 2,height*0.05,width*0.45),
             AppConstant.spaceHeight10,
             TextContext(
               data: 'Filter by date',

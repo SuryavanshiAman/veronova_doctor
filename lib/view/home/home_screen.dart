@@ -348,38 +348,18 @@ TextEditingController meetingCont =TextEditingController();
                                     .data![index].status
                                     .toString() ==
                                 "0"
-                            ? acceptRejectButton(appointmentViewModel
-                                .currentAppointmentsModel!
-                                .data![index]
-                                .id
-                                .toString())
+                            ? acceptRejectButton(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString())
                             : Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  appointmentViewModel
-                                              .currentAppointmentsModel!
-                                              .data![index]
-                                              .status
-                                              .toString() ==
-                                          "1"
+                                  appointmentViewModel.currentAppointmentsModel!.data![index].status.toString() == "1"
                                       ? GestureDetector(
                                           onTap: () {
-                                            documentVerifyViewModel.statusUpdateApi(
-                                                appointmentViewModel
-                                                    .currentAppointmentsModel!
-                                                    .data![
-                                                        index]
-                                                    .id
-                                                    .toString(),
-                                                "2",
-                                                context);
+                                            documentVerifyViewModel.statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(), "2", context);
                                           },
                                           child:documentVerifyViewModel.loadingUpdate && documentVerifyViewModel.selectedIndexAppointmentId.toString() ==  appointmentViewModel
-                                              .currentAppointmentsModel!
-                                              .data![
-                                          index]
-                                              .id.toString()?  Container(
+                                              .currentAppointmentsModel!.data![index].id.toString()?  Container(
                                               alignment: Alignment.center,
                                               height: height * 0.045,
                                               width: width * 0.4,

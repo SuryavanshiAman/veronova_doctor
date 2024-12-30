@@ -6,7 +6,7 @@ class ApiUrl {
   static const sendOtpUrl = "${baseUrl}doctor_otpsend";
   static const verifyOtpUrl = "${baseUrl}doctor_verifyotp";
   static const profileUrl = "${baseUrl}get/profile";
-  static const doctorHistoryUrl = "${baseUrl}Doctor_history";
+  static const doctorHistoryUrl = "${baseUrl}filterbystatus/appointment";
   static const doctorViewReviewUrl = "${baseUrl}doctor_view/";
   static const documentVerifyUrl = "${baseUrl}document_verify";
   static const updateStatusUrl = "${baseUrl}update_doctor_status";
