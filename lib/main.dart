@@ -20,6 +20,8 @@ import 'package:provider/provider.dart';
 import 'view_model/all_policies_view_model.dart';
 import 'view_model/appointment_view_model.dart';
 import 'view_model/document_verify_view_model.dart';
+import 'view_model/meeting_view_model.dart';
+import 'view_model/view_bank_details_view_model.dart';
 import 'view_model/view_slot_view_model.dart';
 
 void main() {
@@ -101,6 +103,8 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (context) => StateCityViewModel()),
               ChangeNotifierProvider(create: (context) => AllPoliciesViewModel()),
               ChangeNotifierProvider(create: (context) => ViewSlotViewModel()),
+              ChangeNotifierProvider(create: (context) => MeetingViewModel()),
+              ChangeNotifierProvider(create: (context) => ViewBankDetailViewModel()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

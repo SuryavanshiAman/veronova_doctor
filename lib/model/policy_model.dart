@@ -14,11 +14,11 @@ class PolicyModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['headings'] = this.headings;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['headings'] = headings;
     data['data'] = this.data;
-    data['msg'] = this.msg;
-    data['status'] = this.status;
+    data['msg'] = msg;
+    data['status'] = status;
     return data;
   }
 }

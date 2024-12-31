@@ -16,11 +16,13 @@ class ApiUrl {
   static const updateProfileUrl = "${baseUrl}update/profile";
   static const slotViewUrl = "${baseUrl}get/slots";
   static const slotDeleteUrl = "${baseUrl}slot_delete";
-  static const bankDetailUrl = "${baseUrl}bank_detail";
+  static const bankDetailUrl = "${baseUrl}update/bank/details";
   static const helpUrl = "${baseUrl}help";
   static const doctorCatUrl = "${baseUrl}all/therapies";
   static const getSlotDates = "${baseUrl}slot_availbility/";
   static const getStateData = "${baseUrl}state";
   static const getDistrictData = "${baseUrl}city/";
   static const policies = "${baseUrl}get/settings";
+  static const meeting = "${baseUrl}add/consultation";
+  static const viewBankDetails = "${baseUrl}bank/view";
 }

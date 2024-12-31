@@ -1,7 +1,9 @@
 import 'package:doctor_apk/res/app_constant.dart';
 import 'package:doctor_apk/res/text_context.dart';
 import 'package:doctor_apk/res/color_constant.dart';
+import 'package:doctor_apk/view_model/all_policies_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Faqs extends StatefulWidget {
   const Faqs({super.key});
@@ -11,6 +13,12 @@ class Faqs extends StatefulWidget {
 }
 
 class _FaqsState extends State<Faqs> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<AllPoliciesViewModel>(context,listen: false).allPoliciesApi(context,"2");
+  }
   @override
   Widget build(BuildContext context) {
     List<dynamic> quick = [
@@ -90,6 +98,7 @@ class _FaqsState extends State<Faqs> {
             "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
       },
     ];
+    final policies= Provider.of<AllPoliciesViewModel>(context).faqResponse?.data;
     return Scaffold(
         backgroundColor: ColorConstant.whiteColor,
         appBar: AppBar(
@@ -112,10 +121,9 @@ class _FaqsState extends State<Faqs> {
           backgroundColor: ColorConstant.containerFillColor,
         ),
         body: ListView.builder(
-            itemCount: quick.length,
+            itemCount: policies?.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              final data = quick[index];
               return Column(
                 children: [
                   Theme(
@@ -130,7 +138,7 @@ class _FaqsState extends State<Faqs> {
                             TextContext(data: "$index."),
                             AppConstant.spaceWidth5,
                             TextContext(
-                              data: data["item"],
+                              data: policies?[index].title.toString()??"jjj",
                               fontWeight: FontWeight.w800,
                             )
                           ],
@@ -139,7 +147,7 @@ class _FaqsState extends State<Faqs> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: TextContext(
-                              data: data["subtitle"],
+                              data: policies?[index].content.toString()??"jjj",
                               maxLines: 3,
                               fontSize: 13,
                               color: ColorConstant.textColor,

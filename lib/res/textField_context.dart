@@ -114,6 +114,7 @@ class TextfieldContext extends StatelessWidget {
     required this.enabled,
     this.controller,
     this.contentPadding,
+    this.onChanged,
   });
 
   final TextInputType? keyboardType;
@@ -136,6 +137,7 @@ class TextfieldContext extends StatelessWidget {
   final Color fillColor;
   final bool enabled;
   final double? contentPadding;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +147,7 @@ class TextfieldContext extends StatelessWidget {
         controller: controller,
         keyboardType: keyboardType,
         maxLength: maxLength,
+        onChanged: onChanged,
         decoration: InputDecoration(
           counterText: "",
           enabled: enabled,

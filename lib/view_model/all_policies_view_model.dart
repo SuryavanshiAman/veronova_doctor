@@ -1,3 +1,4 @@
+import 'package:doctor_apk/model/faq_model.dart';
 import 'package:doctor_apk/model/policy_model.dart';
 import 'package:doctor_apk/repo/all_policies_repo.dart';
 import 'package:flutter/foundation.dart';
@@ -12,6 +13,12 @@ class AllPoliciesViewModel with ChangeNotifier {
     _policiesResponse = response;
     notifyListeners();
   }
+  FaqModel? _faqResponse;
+  FaqModel? get faqResponse => _faqResponse;
+  setFaqData(FaqModel response) {
+    _faqResponse = response;
+    notifyListeners();
+  }
 
   Future<void> allPoliciesApi(BuildContext context,dynamic type) async {
     Map data={
@@ -21,6 +28,8 @@ class AllPoliciesViewModel with ChangeNotifier {
       if (value['status'] == "200") {
         PolicyModel allPoliciesModel = PolicyModel.fromJson(value);
         Provider.of<AllPoliciesViewModel>(context, listen: false).setAllPoliciesData(allPoliciesModel);
+        FaqModel faqModel = FaqModel.fromJson(value);
+        Provider.of<AllPoliciesViewModel>(context, listen: false).setFaqData(faqModel);
       } else {
         if (kDebugMode) {
           print('value: ${value['msg']}');

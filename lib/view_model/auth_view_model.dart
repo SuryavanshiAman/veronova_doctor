@@ -64,7 +64,7 @@ class AuthViewModel with ChangeNotifier {
       dynamic regNumber,
       dynamic regYear,
       dynamic medicalCouncilName,
-      dynamic dob,
+      dynamic gender,
       // dynamic state, dynamic city,
       context) async {
     setLoadingRegister(true);
@@ -76,17 +76,19 @@ class AuthViewModel with ChangeNotifier {
       "reg_number": regNumber,
       "reg_year": regYear,
       "medical_council_name": medicalCouncilName,
-      "gender": dob,
+      "gender": gender,
       // "state":state,
       // "city":city
     };
     print(data);
     _authRepo.registerApi(data).then((value) {
-      if (value['status'].toString() == "200") {
+      if (value['status']== "200") {
         setLoadingRegister(false);
-        userPref.saveUser(value['data']['id'].toString());
-        Navigator.pushReplacementNamed(context, RoutesName.singUpOtpScreen,
-            arguments: {'phone': mobileCon,"status": 1});
+        print("USerID:${value['id']}");
+        userPref.saveUser(value['id'].toString());
+        Navigator.pushReplacementNamed(context, RoutesName.bottomPage,
+            // arguments: {'phone': mobileCon,"status": 1}
+        );
       }else{
         Utils.show(value["message"], context);
         setLoadingRegister(false);

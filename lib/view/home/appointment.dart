@@ -56,7 +56,7 @@ class _HomeHealthCardState extends State<HomeHealthCard> {
                           width: 30,
                           child: Image.asset(
                             "assets/icon/green-Dot.gif",
-                            color: profileViewModel.status.toString() == "0"
+                            color: profileViewModel.status.toString() == "1"
                                 ? ColorConstant.redColor
                                 : ColorConstant.greenColor,
                           )),

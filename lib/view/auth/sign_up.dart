@@ -18,8 +18,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String _selectedLocation = "Select";
-  final List<String> _locations = ["Select", "Male", "Female", "Others"];
+  String _selectedGender = "Select";
+  final List<String> _gender = ["Select", "Male", "Female", "Others"];
   bool itemShow = true;
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
     stateCityViewModel.getDistrictApi("1");
   }
 
-  final emailPattern = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
+  // final emailPattern = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 
   final TextEditingController mobileCon = TextEditingController();
   final TextEditingController nameCon = TextEditingController();
@@ -237,14 +237,14 @@ class _SignUpState extends State<SignUp> {
                           color: ColorConstant.blackColor,
                           fontSize: 17,
                         ),
-                        value: _selectedLocation,
+                        value: _selectedGender,
                         onChanged: (newValue) {
                           setState(() {
-                            _selectedLocation = (newValue)!;
+                            _selectedGender = (newValue)!;
                             itemShow = !itemShow;
                           });
                         },
-                        items: _locations.map((valueItem) {
+                        items: _gender.map((valueItem) {
                           return DropdownMenuItem(
                             value: valueItem,
                             child: Text(
@@ -338,11 +338,14 @@ class _SignUpState extends State<SignUp> {
       ),
       bottomSheet: InkWell(
         onTap: () {
-          if (mobileCon.text.isEmpty) {
+          if (mobileCon.text.isEmpty || mobileCon.text.length <10) {
             Utils.show("Please enter your Phone Number", context);
           } else if (nameCon.text.isEmpty) {
             Utils.show("Please Enter Your Name", context);
-          } else if (_selectedLocation.isEmpty) {
+          }  else if (emailCon.text.isEmpty) {
+            Utils.show("Please Enter Your Email", context);
+          }
+          else if (_selectedGender=="Select") {
             Utils.show("Please select your gender", context);
           } else if (registerNumberCon.text.isEmpty) {
             Utils.show("Please Enter Register Number", context);
@@ -358,7 +361,7 @@ class _SignUpState extends State<SignUp> {
                 registerNumberCon.text,
                 registerYearCon.text,
                 medicalCouncilNameCon.text,
-                _selectedLocation.toString(),
+                _selectedGender.toString(),
                 // selectedState, selectedDistrict,
                 context);
           }

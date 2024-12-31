@@ -73,15 +73,16 @@ class DocumentVerifyViewModel with ChangeNotifier {
     setLoading(true);
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
+    print(idProofImage);
+    print(degreeImage);
     Map data = {
-      "doctor_id": userId,
+      "userid": userId,
       "proof_id": idProofImage,
       "medical_degree": degreeImage,
     };
     _documentVerifyRepo.documentVerifyApi(data).then((value) {
       if (value['status'] == "200") {
         setLoading(false);
-
         final profileViewModel =
             Provider.of<ProfileViewModel>(context, listen: false);
         profileViewModel.profileApi(context);

@@ -23,21 +23,23 @@ class BankViewModel with ChangeNotifier {
   }
 
   Future<void> bankDetailsApi(
-      dynamic accountNameCon,
       dynamic accountNumberCon,
+      dynamic accountNameCon,
+      dynamic branch,
       dynamic ifscCode,
       context) async {
     setLoading(true);
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
     Map data = {
-      "account_name": accountNameCon,
-      "account_number": accountNumberCon,
-      "ifsc_code": ifscCode,
-      "doctor_id": userId,
+      "doctor_id":userId,
+      "account_no":accountNumberCon,
+      "holder_name":accountNameCon,
+      "branch_name":branch,
+      "ifsc_code":ifscCode
     };
     _bankRepo.bankDetailsApi(data).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoading(false);
         Utils.show("Bank Details Update SuccessFully", context);
         Navigator.pop(context);
