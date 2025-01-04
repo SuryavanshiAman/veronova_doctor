@@ -27,19 +27,18 @@ class HelpViewModel with ChangeNotifier {
     UserViewModel userViewModel = UserViewModel();
     String? userId = await userViewModel.getUser();
     Map data = {
-      "user_id": userId,
-      "type":"2",
       "name": nameCon,
-      "phone": mobileCon,
-      "message": messageCon,
+      "mobile": mobileCon,
+      "msg": messageCon,
+      "doctor_id": userId,
     };
     _helpRepo.helpApi(data).then((value) {
-      if (value['status'] == 200) {
+      if (value['status'] == "200") {
         setLoadingHelp(false);
-        Utils.show(value["message"], context);
+        Utils.show(value["msg"], context);
         Navigator.pop(context);
       }else{
-        Utils.show(value["message"], context);
+        Utils.show(value["msg"], context);
       }
     }).onError((error, stackTrace) {
       setLoadingHelp(false);

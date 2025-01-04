@@ -43,6 +43,7 @@ class Data {
   dynamic patientImage;
   dynamic patientGender;
   dynamic doctorFees;
+  dynamic meeting;
 
   Data(
       {this.id,
@@ -59,7 +60,9 @@ class Data {
         this.patientAge,
         this.patientImage,
         this.patientGender,
-        this.doctorFees});
+        this.doctorFees,
+        this.meeting,
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -77,6 +80,7 @@ class Data {
     patientImage = json['patient_image'];
     patientGender = json['patient_gender'];
     doctorFees = json['doctor_fees'];
+    meeting = json['meeting'];
   }
 
   Map<String, dynamic> toJson() {
@@ -96,6 +100,7 @@ class Data {
     data['patient_image'] = patientImage;
     data['patient_gender'] = patientGender;
     data['doctor_fees'] = doctorFees;
+    data['meeting'] = meeting;
     return data;
   }
 }

@@ -321,127 +321,133 @@ class _HomeScreenState extends State<HomeScreen> {
                                           : const Text(''),
                                       GestureDetector(
                                         onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            barrierDismissible: false,
-                                            builder: (context) => AlertDialog(
-                                                alignment: Alignment.center,
-                                                // backgroundColor: Colors.transparent,
-                                                content: Container(
-                                                  padding: const EdgeInsets.all(15),
-                                                  height: height * 0.25,
-                                                  child: Column(
-                                                    children: [
-                                                      const TextContext(
-                                                          data: "Meeting!",
-                                                          fontSize: 14,
-                                                          color: Color(0xff000000),
-                                                          fontFamily: "poppins_reg",
-                                                          fontWeight:
-                                                          FontWeight.w500),
-                                                      SizedBox(
-                                                        height: height * 0.03,
-                                                      ),
-                                                      TextfieldContext(
-                                                        controller: meetingCont,
-                                                        enabled: true,
-                                                        filled: true,
-                                                        fillColor:
-                                                        ColorConstant.whiteColor,
-                                                        intBorder: true,
-                                                        hintText:
-                                                        "Enter meeting link.",
-                                                      ),
-                                                      const Spacer(),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          InkWell(
-                                                              onTap: () {
-                                                                Navigator.of(context)
-                                                                    .pop();
-                                                              },
-                                                              child: Container(
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      5),
-                                                                  color: ColorConstant
-                                                                      .redColor,
-                                                                ),
-                                                                alignment:
-                                                                Alignment.center,
-                                                                height: height * 0.05,
-                                                                width: width * 0.25,
-                                                                // color: Colors.green,
-                                                                child: TextContext(
-                                                                    data: "Cancel",
-                                                                    fontSize: 12,
-                                                                    color: ColorConstant
-                                                                        .whiteColor,
-                                                                    fontFamily:
-                                                                    "poppins_reg",
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                              )),
-                                                          InkWell(
-                                                              onTap: () {
-
-                                                                if(submit.savedIndices.contains(index)){
-
-                                                                }else{
-                                                                  submit.meetingApi(
-                                                                      appointmentData
-                                                                          .userId,
-                                                                      appointmentData
-                                                                          .id,
-                                                                      meetingCont.text,
-                                                                      index, context);
-                                                                  // submit.setSelectedIndex(index);
-                                                                  submit.toggleSave(index);
-                                                                  meetingCont.clear();
+                                          if(submit.savedIndices.contains(index)){
+                                            Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                                          }else{
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (context) => AlertDialog(
+                                                  alignment: Alignment.center,
+                                                  // backgroundColor: Colors.transparent,
+                                                  content: Container(
+                                                    padding: const EdgeInsets.all(15),
+                                                    height: height * 0.25,
+                                                    child: Column(
+                                                      children: [
+                                                        const TextContext(
+                                                            data: "Meeting!",
+                                                            fontSize: 14,
+                                                            color: Color(0xff000000),
+                                                            fontFamily: "poppins_reg",
+                                                            fontWeight:
+                                                            FontWeight.w500),
+                                                        SizedBox(
+                                                          height: height * 0.03,
+                                                        ),
+                                                        TextfieldContext(
+                                                          controller: meetingCont,
+                                                          enabled: true,
+                                                          filled: true,
+                                                          fillColor:
+                                                          ColorConstant.whiteColor,
+                                                          intBorder: true,
+                                                          hintText:
+                                                          "Enter meeting link.",
+                                                        ),
+                                                        const Spacer(),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                          children: [
+                                                            InkWell(
+                                                                onTap: () {
                                                                   Navigator.of(context)
                                                                       .pop();
-                                                                }
-
-                                                              },
-                                                              child: Container(
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      5),
-                                                                  color: ColorConstant
-                                                                      .primaryColor,
-                                                                ),
-                                                                alignment:
-                                                                Alignment.center,
-                                                                height: height * 0.05,
-                                                                width: width * 0.25,
-                                                                // color: Colors.green,
-                                                                child: TextContext(
-                                                                    data: "Submit",
-                                                                    fontSize: 12,
+                                                                },
+                                                                child: Container(
+                                                                  decoration:
+                                                                  BoxDecoration(
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                        5),
                                                                     color: ColorConstant
-                                                                        .whiteColor,
-                                                                    fontFamily:
-                                                                    "poppins_reg",
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                              ))
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                )),
-                                          );
+                                                                        .redColor,
+                                                                  ),
+                                                                  alignment:
+                                                                  Alignment.center,
+                                                                  height: height * 0.05,
+                                                                  width: width * 0.25,
+                                                                  // color: Colors.green,
+                                                                  child: TextContext(
+                                                                      data: "Cancel",
+                                                                      fontSize: 12,
+                                                                      color: ColorConstant
+                                                                          .whiteColor,
+                                                                      fontFamily:
+                                                                      "poppins_reg",
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                                )),
+                                                            InkWell(
+                                                                onTap: () {
+
+                                                                  if(submit.savedIndices.contains(index)){
+
+                                                                  }else{
+                                                                    submit.meetingApi(
+                                                                        appointmentData
+                                                                            .userId,
+                                                                        appointmentData
+                                                                            .id,
+                                                                        meetingCont.text,
+                                                                        index, context);
+                                                                    // submit.setSelectedIndex(index);
+                                                                    submit.toggleSave(index);
+                                                                    meetingCont.clear();
+                                                                    Navigator.of(context)
+                                                                        .pop();
+                                                                  }
+
+                                                                },
+                                                                child: Container(
+                                                                  decoration:
+                                                                  BoxDecoration(
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                        5),
+                                                                    color: ColorConstant
+                                                                        .primaryColor,
+                                                                  ),
+                                                                  alignment:
+                                                                  Alignment.center,
+                                                                  height: height * 0.05,
+                                                                  width: width * 0.25,
+                                                                  // color: Colors.green,
+                                                                  child: TextContext(
+                                                                      data: "Submit",
+                                                                      fontSize: 12,
+                                                                      color: ColorConstant
+                                                                          .whiteColor,
+                                                                      fontFamily:
+                                                                      "poppins_reg",
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                                ))
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )),
+                                            );
+                                          }
+                                          // submit.savedIndices.contains(index)
+
                                         },
                                         child: SizedBox(
                                           child: Container(

@@ -17,7 +17,7 @@ class ApiUrl {
   static const slotViewUrl = "${baseUrl}get/slots";
   static const slotDeleteUrl = "${baseUrl}slot_delete";
   static const bankDetailUrl = "${baseUrl}update/bank/details";
-  static const helpUrl = "${baseUrl}help";
+  static const helpUrl = "${baseUrl}add/support";
   static const doctorCatUrl = "${baseUrl}all/therapies";
   static const getSlotDates = "${baseUrl}slot_availbility/";
   static const getStateData = "${baseUrl}state";
