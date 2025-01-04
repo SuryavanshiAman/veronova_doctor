@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int selectIndex = -1;
+  // int selectIndex = -1;
   bool meeting = false;
   @override
   void initState() {
@@ -358,7 +358,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                         children: [
-                                                          // const Text("Cancel"),
                                                           InkWell(
                                                               onTap: () {
                                                                 Navigator.of(context)
@@ -392,8 +391,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               )),
                                                           InkWell(
                                                               onTap: () {
-                                                                submit.setSelectedIndex(index);
-                                                                if(submit.meetingType==1){
+
+                                                                if(submit.savedIndices.contains(index)){
+
+                                                                }else{
                                                                   submit.meetingApi(
                                                                       appointmentData
                                                                           .userId,
@@ -401,15 +402,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           .id,
                                                                       meetingCont.text,
                                                                       index, context);
-                                                                  // setState(() {
-                                                                  //   meeting[index] = true;
-                                                                  // });
-
+                                                                  // submit.setSelectedIndex(index);
+                                                                  submit.toggleSave(index);
                                                                   meetingCont.clear();
                                                                   Navigator.of(context)
                                                                       .pop();
-                                                                }else{
-
                                                                 }
 
                                                               },
@@ -459,9 +456,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: width * 0.3,
                                             child: TextContext(
                                               fontSize: 13,
-                                              data: submit.meetingType == 1
-                                                  ? "Meeting"
-                                                  : "Start",
+                                              data: submit.savedIndices.contains(index)
+                                                  ? "Start"
+                                                  : "Meeting",
                                               color: ColorConstant.greenColor,
                                               fontWeight: FontWeight.w500,
                                             ),

@@ -26,6 +26,16 @@ setMeeting(int value, dynamic index){
   _meetingType=value:null;
   notifyListeners();
 }
+  final Set<int> _savedIndices = {};
+  Set<int> get savedIndices => _savedIndices;
+  void toggleSave(int value) {
+    if (_savedIndices.contains(value)) {
+      _savedIndices.remove(value); // Remove if already selected
+    } else {
+      _savedIndices.add(value); // Add if not selected
+    }
+    notifyListeners();
+  }
   setLoading(bool value) {
     _loading = value;
     notifyListeners();

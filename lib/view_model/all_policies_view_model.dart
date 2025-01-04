@@ -13,13 +13,18 @@ class AllPoliciesViewModel with ChangeNotifier {
     _policiesResponse = response;
     notifyListeners();
   }
-  FaqModel? _faqResponse;
-  FaqModel? get faqResponse => _faqResponse;
-  setFaqData(FaqModel response) {
+  // FaqModel? _faqResponse;
+  // FaqModel? get faqResponse => _faqResponse;
+  // setFaqData(FaqModel response) {
+  //   _faqResponse = response;
+  //   notifyListeners();
+  // }
+  List<FaqModel>? _faqResponse = [];
+  List<FaqModel>? get faqResponse => _faqResponse;
+  setFaqData(List<FaqModel> response) {
     _faqResponse = response;
     notifyListeners();
   }
-
   Future<void> allPoliciesApi(BuildContext context,dynamic type) async {
     Map data={
       "type":type
@@ -28,8 +33,9 @@ class AllPoliciesViewModel with ChangeNotifier {
       if (value['status'] == "200") {
         PolicyModel allPoliciesModel = PolicyModel.fromJson(value);
         Provider.of<AllPoliciesViewModel>(context, listen: false).setAllPoliciesData(allPoliciesModel);
-        FaqModel faqModel = FaqModel.fromJson(value);
-        Provider.of<AllPoliciesViewModel>(context, listen: false).setFaqData(faqModel);
+        List<FaqModel> faqModelList = FaqModel.parseFaqData(value['data']);
+        Provider.of<AllPoliciesViewModel>(context, listen: false)
+            .setFaqData(faqModelList);
       } else {
         if (kDebugMode) {
           print('value: ${value['msg']}');

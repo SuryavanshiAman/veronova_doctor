@@ -1,3 +1,4 @@
+import 'package:doctor_apk/main.dart';
 import 'package:doctor_apk/res/app_constant.dart';
 import 'package:doctor_apk/res/text_context.dart';
 import 'package:doctor_apk/res/color_constant.dart';
@@ -21,84 +22,7 @@ class _FaqsState extends State<Faqs> {
   }
   @override
   Widget build(BuildContext context) {
-    List<dynamic> quick = [
-      {
-        "item": "How to login App?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "How to book to appointment?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "How to cancel an appointment",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "What if felled to book?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "How to payment?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "What if i felled to book?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "How to pay?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "How to payment?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-      {
-        "item": "Payment modes available?",
-        "subtitle":
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point"
-      },
-    ];
-    final policies= Provider.of<AllPoliciesViewModel>(context).faqResponse?.data;
+    final faqResponse= Provider.of<AllPoliciesViewModel>(context).faqResponse;
     return Scaffold(
         backgroundColor: ColorConstant.whiteColor,
         appBar: AppBar(
@@ -121,47 +45,55 @@ class _FaqsState extends State<Faqs> {
           backgroundColor: ColorConstant.containerFillColor,
         ),
         body: ListView.builder(
-            itemCount: policies?.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Theme(
-                    data: Theme.of(context).copyWith(
-                      dividerColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                    ),
-                    child: ExpansionTile(
-                        minTileHeight: 10,
-                        title: Row(
-                          children: [
-                            TextContext(data: "$index."),
-                            AppConstant.spaceWidth5,
-                            TextContext(
-                              data: policies?[index].title.toString()??"jjj",
-                              fontWeight: FontWeight.w800,
-                            )
-                          ],
-                        ),
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: TextContext(
-                              data: policies?[index].content.toString()??"jjj",
-                              maxLines: 3,
-                              fontSize: 13,
-                              color: ColorConstant.textColor,
-                              fontWeight: FontWeight.w100,
-                            ),
-                          ),
-                        ]),
+          itemCount: faqResponse?.length ?? 0, // Get length from faqResponse
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            final faq = faqResponse![index]; // Get the FAQ at the current index
+            return Column(
+              children: [
+                Theme(
+                  data: Theme.of(context).copyWith(
+                    dividerColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                   ),
-                  Divider(
-                    thickness: 5,
-                    color: ColorConstant.scaffoldBgColor,
-                  )
-                ],
-              );
-            }));
+                  child: ExpansionTile(
+                    minTileHeight: 10,
+                    title: Row(
+                      children: [
+                        TextContext(data: "${index + 1}. "), // Display index + 1
+                        AppConstant.spaceWidth5,
+                        SizedBox(
+                          width: width*0.7,
+                          child: TextContext(
+                            data: faq.title ?? "No title", // Display the title
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: TextContext(
+                          data: faq.content ?? "No content available", // Display the content
+                          // maxLines: 3,
+                          fontSize: 13,
+                          color: ColorConstant.textColor,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  thickness: 5,
+                  color: ColorConstant.scaffoldBgColor,
+                ),
+              ],
+            );
+          },
+        )
+
+    );
   }
 }
