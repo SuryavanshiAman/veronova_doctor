@@ -33,10 +33,10 @@ class _FaqsState extends State<Faqs> {
               child: Image.asset(
                 "assets/icon/arrow_1.png",
                 scale: 6,
-                color: Color(0xff1E1E1E),
+                color: const Color(0xff1E1E1E),
               )),
           centerTitle: true,
-          title: TextContext(
+          title: const TextContext(
             data: "FAQs",
             fontSize: 17,
             fontWeight: FontWeight.w600,
@@ -44,11 +44,12 @@ class _FaqsState extends State<Faqs> {
           ),
           backgroundColor: ColorConstant.containerFillColor,
         ),
-        body: ListView.builder(
-          itemCount: faqResponse?.length ?? 0, // Get length from faqResponse
+        body:faqResponse!=null||faqResponse!.isNotEmpty?
+        ListView.builder(
+          itemCount: faqResponse.length ?? 0, // Get length from faqResponse
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            final faq = faqResponse![index]; // Get the FAQ at the current index
+            final faq = faqResponse[index]; // Get the FAQ at the current index
             return Column(
               children: [
                 Theme(
@@ -92,7 +93,7 @@ class _FaqsState extends State<Faqs> {
               ],
             );
           },
-        )
+        ):const Center(child: CircularProgressIndicator())
 
     );
   }

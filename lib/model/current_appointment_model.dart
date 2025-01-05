@@ -39,6 +39,8 @@ class Data {
   dynamic expertsId;
   dynamic slotsId;
   dynamic weekDay;
+  dynamic description;
+  dynamic date;
   dynamic patientAge;
   dynamic patientImage;
   dynamic patientGender;
@@ -57,6 +59,8 @@ class Data {
         this.expertsId,
         this.slotsId,
         this.weekDay,
+        this.description,
+        this.date,
         this.patientAge,
         this.patientImage,
         this.patientGender,
@@ -76,6 +80,8 @@ class Data {
     expertsId = json['experts_id'];
     slotsId = json['slots_id'];
     weekDay = json['week_day'];
+    description = json['description'];
+    date = json['date'];
     patientAge = json['patient_age'];
     patientImage = json['patient_image'];
     patientGender = json['patient_gender'];
@@ -96,6 +102,8 @@ class Data {
     data['experts_id'] = expertsId;
     data['slots_id'] = slotsId;
     data['week_day'] = weekDay;
+    data['description'] = description;
+    data['date'] = date;
     data['patient_age'] = patientAge;
     data['patient_image'] = patientImage;
     data['patient_gender'] = patientGender;

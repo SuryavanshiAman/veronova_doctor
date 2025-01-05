@@ -149,8 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       appointmentData.patientAge.toString()),
                                   appointmentInfo("Patient Gender",
                                       appointmentData.patientGender.toString()),
-                                  appointmentInfo("Requested Time",
-                                      "${DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.updatedAt))}"),
+                                  appointmentInfo("Requested Date",
+                                      DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.updatedAt))),
+                                  appointmentInfo("Consult Date",
+                                      DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))),
                                   appointmentInfo(
                                     "Payment Mode",
                                     "Online Payment",
@@ -187,25 +189,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.symmetric(
                               horizontal: 15,
                             ),
-                            child: Row(
+                            child:
+                            Row(
                               children: [
-                                Image.asset(
-                                  "assets/icon/map.png",
-                                  scale: 5,
-                                ),
+                             Text("Description:"),
                                 SizedBox(
                                   width: width * 0.02,
                                 ),
-                                TextContext(
-                                    data: appointmentViewModel
-                                        .currentAppointmentsModel!
-                                        .data![index]
-                                        .name
-                                        .toString(),
-                                    fontSize: 14,
-                                    color: const Color(0xff979797),
-                                    fontFamily: "poppins_reg",
-                                    fontWeight: FontWeight.w400),
+                                Container(
+                                  width: width*0.65,
+                                  child: TextContext(
+                                      data: appointmentViewModel
+                                          .currentAppointmentsModel!
+                                          .data![index]
+                                          .description
+                                          .toString(),
+                                      fontSize: 14,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: const Color(0xff979797),
+                                      fontFamily: "poppins_reg",
+                                      fontWeight: FontWeight.w400),
+                                ),
+
                               ],
                             ),
                           ),

@@ -45,14 +45,15 @@ class _PolicyState extends State<Policy> {
         ),
         backgroundColor: ColorConstant.containerFillColor,
       ),
-      body: SingleChildScrollView(
+      body:policies?.data.toString()!=null|| policies!.data.toString().isNotEmpty?  SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: HtmlWidget(
                 policies?.data.toString()??""
             ),
-          )),
+          )):
+      Center(child: CircularProgressIndicator()),
       // Padding(
       //   padding:const EdgeInsets.symmetric(horizontal: 15),
       //   child: ListView(
