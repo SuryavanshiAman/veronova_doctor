@@ -21,18 +21,14 @@ int get meetingType=>_meetingType;
     _selectedIndex=value;
     notifyListeners();
   }
-setMeeting(int value, dynamic index){
-  selectedIndex==index?
-  _meetingType=value:null;
-  notifyListeners();
-}
+
   final Set<int> _savedIndices = {};
   Set<int> get savedIndices => _savedIndices;
   void toggleSave(int value) {
     if (_savedIndices.contains(value)) {
-      _savedIndices.remove(value); // Remove if already selected
+      _savedIndices.remove(value);
     } else {
-      _savedIndices.add(value); // Add if not selected
+      _savedIndices.add(value);
     }
     notifyListeners();
   }
@@ -45,7 +41,7 @@ setMeeting(int value, dynamic index){
       dynamic userId,
       dynamic appointmentId,
       dynamic link,
-      dynamic index,
+      // dynamic index,
       context) async {
     setLoading(true);
     UserViewModel userViewModel = UserViewModel();
@@ -55,14 +51,15 @@ setMeeting(int value, dynamic index){
       "doctor_id":docUserId,
       "user_id":userId,
       "appointment_id":appointmentId,
-      "meeting":link
+      "meeting":link,
+      "status_meeting":"1"
     };
 
     print("data ${data}");
     _meetingRepo.meetingApi(data).then((value) {
       if (value['status'] == "200") {
         setLoading(false);
-        setMeeting(2,index);
+        // setMeeting(2,index);
         Utils.show("Meeting link send Successfully", context);
         Provider.of<AppointmentViewModel>(context, listen: false).currentAppointmentApi(context);
 Navigator.pop(context);

@@ -32,6 +32,7 @@ class Data {
   dynamic docId;
   dynamic userId;
   dynamic status;
+  dynamic meetingStatus;
   dynamic updatedAt;
   dynamic name;
   dynamic mobile;
@@ -52,6 +53,7 @@ class Data {
         this.docId,
         this.userId,
         this.status,
+        this.meetingStatus,
         this.updatedAt,
         this.name,
         this.mobile,
@@ -73,6 +75,7 @@ class Data {
     docId = json['doc_id'];
     userId = json['user_id'];
     status = json['status'];
+    meetingStatus = json['status_meeting'];
     updatedAt = json['updated_at'];
     name = json['name'];
     mobile = json['mobile'];
@@ -95,6 +98,7 @@ class Data {
     data['doc_id'] = docId;
     data['user_id'] = userId;
     data['status'] = status;
+    data['status_meeting'] = meetingStatus;
     data['updated_at'] = updatedAt;
     data['name'] = name;
     data['mobile'] = mobile;

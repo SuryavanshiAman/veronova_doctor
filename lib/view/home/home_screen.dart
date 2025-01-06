@@ -1,6 +1,5 @@
 import 'package:doctor_apk/main.dart';
 import 'package:doctor_apk/res/app_constant.dart';
-import 'package:doctor_apk/res/make_call.dart';
 import 'package:doctor_apk/res/textField_context.dart';
 import 'package:doctor_apk/res/text_context.dart';
 import 'package:doctor_apk/res/color_constant.dart';
@@ -37,8 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final appointmentViewModel = Provider.of<AppointmentViewModel>(context);
     final submit = Provider.of<MeetingViewModel>(context);
-    final documentVerifyViewModel =
-        Provider.of<DocumentVerifyViewModel>(context);
+    final documentVerifyViewModel = Provider.of<DocumentVerifyViewModel>(context);
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     return Scaffold(
       backgroundColor: ColorConstant.scaffoldBgColor,
       body: RefreshIndicator(
@@ -146,9 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   appointmentInfo("Phone",
                                       appointmentData.mobile.toString()),
                                   appointmentInfo("Patient Age",
-                                      appointmentData.patientAge.toString()),
+                                      appointmentData.patientAge.toString()=="null"?"":appointmentData.patientAge.toString()),
                                   appointmentInfo("Patient Gender",
-                                      appointmentData.patientGender.toString()),
+                                      appointmentData.patientGender.toString()=="null"?"":appointmentData.patientGender.toString()),
                                   appointmentInfo("Requested Date",
                                       DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.updatedAt))),
                                   appointmentInfo("Consult Date",
@@ -157,8 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     "Payment Mode",
                                     "Online Payment",
                                   ),
-                                  appointmentInfo(
-                                      "Meeting Time", "22/14/24 5:00 pm"),
+                                  // appointmentInfo(
+                                  //     "Meeting Time", "22/14/24 5:00 pm"),
                                 ],
                               )
                             ],
@@ -192,11 +192,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child:
                             Row(
                               children: [
-                             Text("Description:"),
+                             const Text("Description:"),
                                 SizedBox(
                                   width: width * 0.02,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: width*0.65,
                                   child: TextContext(
                                       data: appointmentViewModel
@@ -271,35 +271,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      appointmentViewModel.currentAppointmentsModel!.data![index].status.toString() == "1"
-                                          ? GestureDetector(
+                                      // appointmentViewModel.currentAppointmentsModel!.data![index].status.toString() == "1"
+                                      //     ?
+                                      GestureDetector(
                                               onTap: () {
                                                 documentVerifyViewModel
                                                     .statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(),
                                                         "2",
                                                         context);
                                               },
-                                              child: documentVerifyViewModel
-                                                          .loadingUpdate &&
-                                                      documentVerifyViewModel
-                                                              .selectedIndexAppointmentId
-                                                              .toString() ==
-                                                          appointmentViewModel
-                                                              .currentAppointmentsModel!
-                                                              .data![index]
-                                                              .id
-                                                              .toString()
-                                                  ? Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      height: height * 0.045,
-                                                      width: width * 0.4,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color: ColorConstant
-                                                            .primaryColor,
-                                                      ))
-                                                  : Container(
+                                              child:
+                                              // documentVerifyViewModel
+                                              //             .loadingUpdate &&
+                                              //         documentVerifyViewModel
+                                              //                 .selectedIndexAppointmentId
+                                              //                 .toString() ==
+                                              //             appointmentViewModel
+                                              //                 .currentAppointmentsModel!
+                                              //                 .data![index]
+                                              //                 .id
+                                              //                 .toString()
+                                              //     ? Container(
+                                              //         alignment:
+                                              //             Alignment.center,
+                                              //         height: height * 0.045,
+                                              //         width: width * 0.4,
+                                              //         child:
+                                              //             CircularProgressIndicator(
+                                              //           color: ColorConstant
+                                              //               .primaryColor,
+                                              //         ))
+                                              //     :
+                                              Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -322,12 +325,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             FontWeight.w500,
                                                       ),
                                                     ),
-                                            )
-                                          : const Text(''),
+                                            ),
                                       GestureDetector(
                                         onTap: () {
-                                          if(submit.savedIndices.contains(index)){
-                                            Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                                          if(appointmentData.meetingStatus=="1"){
+                                            if( formattedDate== appointmentData.date){
+                                              Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                                            }else{
+                                              Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
+                                            }
+
                                           }else{
                                             showDialog(
                                               context: context,
@@ -399,23 +406,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 )),
                                                             InkWell(
                                                                 onTap: () {
-
-                                                                  if(submit.savedIndices.contains(index)){
-
-                                                                  }else{
-                                                                    submit.meetingApi(
-                                                                        appointmentData
-                                                                            .userId,
-                                                                        appointmentData
-                                                                            .id,
-                                                                        meetingCont.text,
-                                                                        index, context);
-                                                                    // submit.setSelectedIndex(index);
-                                                                    submit.toggleSave(index);
-                                                                    meetingCont.clear();
+                                                                    submit.meetingApi(appointmentData.userId, appointmentData.id, meetingCont.text,  context);
                                                                     Navigator.of(context)
                                                                         .pop();
-                                                                  }
 
                                                                 },
                                                                 child: Container(
@@ -467,7 +460,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: width * 0.3,
                                             child: TextContext(
                                               fontSize: 13,
-                                              data: submit.savedIndices.contains(index)
+                                              data: appointmentData.meetingStatus=="1"
                                                   ? "Start"
                                                   : "Meeting",
                                               color: ColorConstant.greenColor,
