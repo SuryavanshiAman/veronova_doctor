@@ -52,6 +52,7 @@ class Data {
   dynamic fees;
   dynamic therapyId;
   dynamic documentstatus;
+  dynamic profession;
 
   Data(
       {this.id,
@@ -82,7 +83,9 @@ class Data {
         this.about,
         this.fees,
         this.therapyId,
-        this.documentstatus});
+        this.documentstatus,
+        this.profession,
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -114,6 +117,7 @@ class Data {
     fees = json['fees'];
     therapyId = json['therapy_id'];
     documentstatus = json['documentstatus'];
+    profession = json['profession'];
   }
 
   Map<String, dynamic> toJson() {
@@ -147,6 +151,7 @@ class Data {
     data['fees'] = fees;
     data['therapy_id'] = therapyId;
     data['documentstatus'] = documentstatus;
+    data['profession'] = profession;
     return data;
   }
 }

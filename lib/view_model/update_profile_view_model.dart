@@ -30,6 +30,7 @@ class UpdateProfileViewModel with ChangeNotifier {
       dynamic expCon,
       dynamic feeCon,
       dynamic specialties,
+      dynamic profession,
       dynamic about,
       context) async {
     setLoading(true);
@@ -48,6 +49,7 @@ print("Aman:$specialties");
       "fees": feeCon,
     "profile":"Male",
       "specialties": specialties.toString(),
+      "profession": profession,
       "about": about,
       "profile_pic":documentVerifyViewModel.idProfileImage!=null?base64Decode(documentVerifyViewModel.idProfileImage??""):""
     };

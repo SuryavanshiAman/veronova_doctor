@@ -175,20 +175,14 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
+                    const Row(
                       children: [
-                        const TextContext(
+                        TextContext(
                           data: "Email * ",
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           color: Color(0xff444343),
                         ),
-                        // TextContext(
-                        //   fontSize: 13,
-                        //   data: "(Optional)",
-                        //   fontWeight: FontWeight.w400,
-                        //   color: ColorConstant.greyColor,
-                        // )
                       ],
                     ),
                     const SizedBox(

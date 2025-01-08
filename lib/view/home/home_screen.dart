@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               onTap: () {
                                                 documentVerifyViewModel
                                                     .statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(),
-                                                        "2",
+                                                        "4",
                                                         context);
                                               },
                                               child:
@@ -334,7 +334,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             }else{
                                               Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
                                             }
-
                                           }else{
                                             showDialog(
                                               context: context,

@@ -30,6 +30,7 @@ class _ProfileState extends State<Profile> {
   final address = TextEditingController();
   final qualification = TextEditingController();
   final experience = TextEditingController();
+  final profession = TextEditingController();
   final fees = TextEditingController();
   final specialist = TextEditingController();
   final about = TextEditingController();
@@ -46,21 +47,16 @@ class _ProfileState extends State<Profile> {
     final profileViewModel =
         Provider.of<ProfileViewModel>(context, listen: false);
     profileViewModel.profileApi(context);
-    // profileViewModel.doctorCatApi(context);
     if (profileViewModel.modelData != null &&
         profileViewModel.modelData!.data != null &&
         profileViewModel.modelData!.data!.specialties != null) {
       List<dynamic> listId =
           jsonDecode(profileViewModel.modelData!.data!.specialties);
-
       for (var resId in listId) {
         final resName = profileViewModel.doctorDepartmentModelData!.data!
             .where((e) => e.id == resId);
-
         selectedNotRemoveVal.addAll(resName);
       }
-      // selectedDistrict=  Provider.of<ProfileViewModel>(context, listen: false).modelData?.data!.city??"Select Cty";
-      // selectedState=  Provider.of<ProfileViewModel>(context, listen: false).modelData?.data!.state??"Select District";
     }
   }
 
@@ -85,23 +81,9 @@ class _ProfileState extends State<Profile> {
               _isTextFieldEnabled = !_isTextFieldEnabled;
             });
             if (!_isTextFieldEnabled) {
-              // final selectedSpecialitiesIds = selectedValues.map((e) => e.id).toList();
-              // print("SSSS:$selectedSpecialitiesIds");
-              // updateProfileViewModel.updateProfileApi(
-              //   name.text,
-              //   email.text,
-              //   qualification.text,
-              //   experience.text,
-              //   fees.text,
-              //   selectedSpecialitiesIds,
-              //   about.text,
-              //   context,
-              // );
               final selectedSpecialitiesIds = selectedValues.isNotEmpty
                   ? selectedValues.map((e) => e.id).toList()
                   : selectedNotRemoveVal.map((e) => e.id).toList();
-
-              print("SSSS:$selectedSpecialitiesIds");
               updateProfileViewModel.updateProfileApi(
                 name.text,
                 email.text,
@@ -109,6 +91,7 @@ class _ProfileState extends State<Profile> {
                 experience.text,
                 fees.text,
                 selectedSpecialitiesIds,
+                profession.text,
                 about.text,
                 context,
               );
@@ -151,13 +134,10 @@ class _ProfileState extends State<Profile> {
       body: ListView(
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         children: [
           AppConstant.spaceHeight5,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -302,74 +282,11 @@ class _ProfileState extends State<Profile> {
                     color: ColorConstant.primaryColor,
                   ),
                 ),
-                // AppConstant.spaceHeight5,
-                // TextfieldContext(
-                //   hintStyle: TextStyle(
-                //       color: profileViewModel?.address == null
-                //           ? Colors.grey
-                //           : Colors.black),
-                //   keyboardType: TextInputType.streetAddress,
-                //   intBorder: false,
-                //   fillColor: ColorConstant.whiteColor,
-                //   filled: true,
-                //   hintText:
-                //       profileViewModel?.address ?? 'Enter Your Clinic Address',
-                //   prefixIcon: Icon(
-                //     Icons.apartment,
-                //     color: ColorConstant.primaryColor,
-                //   ),
-                //   enabled: _isTextFieldEnabled,
-                //   controller: address,
-                // ),
-                // AppConstant.spaceHeight5,
-                // TextfieldContext(
-                //   hintStyle: TextStyle(
-                //       color: profileViewModel?.city == null
-                //           ? Colors.grey
-                //           : Colors.black),
-                //   keyboardType: TextInputType.streetAddress,
-                //   intBorder: false,
-                //   fillColor: ColorConstant.whiteColor,
-                //   filled: true,
-                //   hintText: profileViewModel?.city ?? 'Enter Your District',
-                //   prefixIcon: Icon(
-                //     Icons.apartment,
-                //     color: ColorConstant.primaryColor,
-                //   ),
-                //   enabled: false,
-                //   // controller: address,
-                // ),
-                // AppConstant.spaceHeight5,
-                // TextfieldContext(
-                //   hintStyle: TextStyle(
-                //       color: profileViewModel?.state == null
-                //           ? Colors.grey
-                //           : Colors.black),
-                //   keyboardType: TextInputType.streetAddress,
-                //   intBorder: false,
-                //   fillColor: ColorConstant.whiteColor,
-                //   filled: true,
-                //   hintText: profileViewModel?.state ?? 'Enter Your State',
-                //   prefixIcon: Icon(
-                //     Icons.apartment,
-                //     color: ColorConstant.primaryColor,
-                //   ),
-                //   enabled: false,
-                //   // controller: address,
-                // ),
-              ],
-            ),
-          ),
           AppConstant.spaceHeight10,
           Divider(
             thickness: 3,
             color: ColorConstant.scaffoldBgColor,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
                 const TextContext(
                     data: "Qualification",
                     fontWeight: FontWeight.w500,
@@ -391,19 +308,11 @@ class _ProfileState extends State<Profile> {
                   enabled: _isTextFieldEnabled,
                   controller: qualification,
                 ),
-              ],
-            ),
-          ),
           Divider(
             thickness: 3,
             color: ColorConstant.scaffoldBgColor,
           ),
           AppConstant.spaceHeight10,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
                 const TextContext(
                     data: "Experience",
                     fontWeight: FontWeight.w500,
@@ -450,20 +359,32 @@ class _ProfileState extends State<Profile> {
                       child: const TextContext(data: "₹")),
                   controller: fees,
                 ),
-              ],
-            ),
-          ),
           AppConstant.spaceHeight10,
           Divider(
             thickness: 3,
             color: ColorConstant.scaffoldBgColor,
           ),
           AppConstant.spaceHeight5,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          const TextContext(
+              data: "Profession",
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              color: Color(0xff000000),
+              fontFamily: "poppins_reg"),
+          AppConstant.spaceHeight5,
+          TextfieldContext(
+            hintStyle: TextStyle(
+                color: profileViewModel?.profession == null
+                    ? Colors.grey
+                    : Colors.black),
+            intBorder: false,
+            fillColor: ColorConstant.whiteColor,
+            filled: true,
+            hintText: profileViewModel?.profession ?? 'Enter Yor Profession ',
+            enabled: _isTextFieldEnabled,
+            controller: profession,
+          ),
+          AppConstant.spaceHeight15,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -481,7 +402,7 @@ class _ProfileState extends State<Profile> {
                       ),
                   ],
                 ),
-                AppConstant.spaceHeight15,
+                AppConstant.spaceHeight5,
                 if (selectedValues.isNotEmpty)
                   Container(
                     width: width,
@@ -628,9 +549,6 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 70,
                 ),
-              ],
-            ),
-          ),
         ],
       ),
     );
