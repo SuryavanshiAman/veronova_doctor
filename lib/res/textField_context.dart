@@ -99,6 +99,7 @@ class TextfieldContext extends StatelessWidget {
     this.focusNode,
     this.maxLength,
     this.decoration,
+    this.readOnly=false,
     this.style,
     this.maxLines,
     this.prefixIcon,
@@ -115,13 +116,14 @@ class TextfieldContext extends StatelessWidget {
     this.controller,
     this.contentPadding,
     this.onChanged,
+    this.onTap,
   });
 
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
   final int? maxLength;
   final InputDecoration? decoration;
-  final bool readOnly = false;
+  final bool readOnly ;
   final TextStyle? style;
   final int? maxLines;
   final Widget? prefixIcon;
@@ -138,6 +140,7 @@ class TextfieldContext extends StatelessWidget {
   final bool enabled;
   final double? contentPadding;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +151,7 @@ class TextfieldContext extends StatelessWidget {
         keyboardType: keyboardType,
         maxLength: maxLength,
         onChanged: onChanged,
+        onTap: onTap,
         decoration: InputDecoration(
           counterText: "",
           enabled: enabled,
