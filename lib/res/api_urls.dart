@@ -25,4 +25,5 @@ class ApiUrl {
   static const policies = "${baseUrl}get/settings";
   static const meeting = "${baseUrl}add/consultation";
   static const viewBankDetails = "${baseUrl}bank/view";
+  static const sendTime = "${baseUrl}appointment-date";
 }

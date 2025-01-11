@@ -18,4 +18,16 @@ class MeetingRepo {
       rethrow;
     }
   }
+  Future<dynamic> sendTimeApi(dynamic data) async {
+    try {
+      dynamic response =
+      await _apiServices.getPostApiResponse(ApiUrl.sendTime, data);
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error occurred during sendTimeApi: $e');
+      }
+      rethrow;
+    }
+  }
 }

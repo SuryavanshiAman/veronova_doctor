@@ -45,6 +45,7 @@ class Data {
   dynamic patientAge;
   dynamic patientImage;
   dynamic patientGender;
+  dynamic appointmentTime;
   dynamic doctorFees;
   dynamic meeting;
 
@@ -66,6 +67,7 @@ class Data {
         this.patientAge,
         this.patientImage,
         this.patientGender,
+        this.appointmentTime,
         this.doctorFees,
         this.meeting,
       });
@@ -88,6 +90,7 @@ class Data {
     patientAge = json['patient_age'];
     patientImage = json['patient_image'];
     patientGender = json['patient_gender'];
+    appointmentTime = json['appointment_date'];
     doctorFees = json['doctor_fees'];
     meeting = json['meeting'];
   }
@@ -111,6 +114,7 @@ class Data {
     data['patient_age'] = patientAge;
     data['patient_image'] = patientImage;
     data['patient_gender'] = patientGender;
+    data['appointment_date'] = appointmentTime;
     data['doctor_fees'] = doctorFees;
     data['meeting'] = meeting;
     return data;

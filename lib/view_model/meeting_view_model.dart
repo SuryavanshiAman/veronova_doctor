@@ -71,4 +71,36 @@ Navigator.pop(context);
       }
     });
   }
+
+  Future<void> sendTimeApi(
+      dynamic appointmentId,
+      dynamic time,
+      // dynamic index,
+      context) async {
+    setLoading(true);
+    UserViewModel userViewModel = UserViewModel();
+    String? docUserId = await userViewModel.getUser();
+
+    Map data = {
+      "appointmentid":appointmentId,
+      "doc_id":docUserId,
+      "appointment_date":time
+    };
+
+    print("data ${data}");
+    _meetingRepo.sendTimeApi(data).then((value) {
+      if (value['status'] == "200") {
+        setLoading(false);
+        // setMeeting(2,index);
+        Utils.show("Meeting time send Successfully", context);
+        Provider.of<AppointmentViewModel>(context, listen: false).currentAppointmentApi(context);
+        // Navigator.pop(context);
+      }
+    }).onError((error, stackTrace) {
+      setLoading(false);
+      if (kDebugMode) {
+        print('error: $error');
+      }
+    });
+  }
 }
