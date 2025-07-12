@@ -4,6 +4,7 @@ import 'package:doctor_apk/res/textField_context.dart';
 import 'package:doctor_apk/res/text_context.dart';
 import 'package:doctor_apk/res/color_constant.dart';
 import 'package:doctor_apk/utils/utils.dart';
+import 'package:doctor_apk/view/video_call/video_call_screen.dart';
 import 'package:doctor_apk/view_model/appointment_view_model.dart';
 import 'package:doctor_apk/view_model/document_verify_view_model.dart';
 import 'package:doctor_apk/view_model/meeting_view_model.dart';
@@ -11,6 +12,9 @@ import 'package:doctor_apk/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/routes/routes_name.dart';
+import 'add_prescription_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -124,9 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontFamily: "poppins_reg",
                                           fontWeight: FontWeight.w600))
                                 ])),
-                                Image.asset(
-                                  "assets/img/trangale.png",
-                                  scale: 4,
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(
+                                        context, RoutesName.addPrescriptionScreen);
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>AddPrescriptionScreen()));
+                                  },
+                                  child: Image.asset(
+                                    "assets/img/add.png",
+                                    scale: 4,
+
+                                  ),
                                 )
                               ],
                             ),
@@ -353,121 +365,129 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "5"?
                              GestureDetector(
                                onTap: () {
-                                 if(appointmentData.meetingStatus=="1"){
-                                   if( formattedDate== appointmentData.date){
-                                     Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
-                                   }else{
-                                     Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
-                                   }
-                                 }else{
-                                   showDialog(
-                                     context: context,
-                                     barrierDismissible: false,
-                                     builder: (context) => AlertDialog(
-                                         alignment: Alignment.center,
-                                         // backgroundColor: Colors.transparent,
-                                         content: Container(
-                                           padding: const EdgeInsets.all(15),
-                                           height: height * 0.25,
-                                           child: Column(
-                                             children: [
-                                               const TextContext(
-                                                   data: "Meeting!",
-                                                   fontSize: 14,
-                                                   color: Color(0xff000000),
-                                                   fontFamily: "poppins_reg",
-                                                   fontWeight:
-                                                   FontWeight.w500),
-                                               SizedBox(
-                                                 height: height * 0.03,
-                                               ),
-                                               TextfieldContext(
-                                                 controller: meetingCont,
-                                                 enabled: true,
-                                                 filled: true,
-                                                 fillColor:
-                                                 ColorConstant.whiteColor,
-                                                 intBorder: true,
-                                                 hintText:
-                                                 "Enter meeting link.",
-                                               ),
-                                               const Spacer(),
-                                               Row(
-                                                 mainAxisAlignment:
-                                                 MainAxisAlignment
-                                                     .spaceBetween,
-                                                 children: [
-                                                   InkWell(
-                                                       onTap: () {
-                                                         Navigator.of(context)
-                                                             .pop();
-                                                       },
-                                                       child: Container(
-                                                         decoration:
-                                                         BoxDecoration(
-                                                           borderRadius:
-                                                           BorderRadius
-                                                               .circular(
-                                                               5),
-                                                           color: ColorConstant
-                                                               .redColor,
-                                                         ),
-                                                         alignment:
-                                                         Alignment.center,
-                                                         height: height * 0.05,
-                                                         width: width * 0.25,
-                                                         // color: Colors.green,
-                                                         child: TextContext(
-                                                             data: "Cancel",
-                                                             fontSize: 12,
-                                                             color: ColorConstant
-                                                                 .whiteColor,
-                                                             fontFamily:
-                                                             "poppins_reg",
-                                                             fontWeight:
-                                                             FontWeight
-                                                                 .w600),
-                                                       )),
-                                                   InkWell(
-                                                       onTap: () {
-                                                           submit.meetingApi(appointmentData.userId, appointmentData.id, meetingCont.text,  context);
-                                                           Navigator.of(context)
-                                                               .pop();
-
-                                                       },
-                                                       child: Container(
-                                                         decoration:
-                                                         BoxDecoration(
-                                                           borderRadius:
-                                                           BorderRadius
-                                                               .circular(
-                                                               5),
-                                                           color: ColorConstant
-                                                               .primaryColor,
-                                                         ),
-                                                         alignment:
-                                                         Alignment.center,
-                                                         height: height * 0.05,
-                                                         width: width * 0.25,
-                                                         // color: Colors.green,
-                                                         child: TextContext(
-                                                             data: "Submit",
-                                                             fontSize: 12,
-                                                             color: ColorConstant
-                                                                 .whiteColor,
-                                                             fontFamily:
-                                                             "poppins_reg",
-                                                             fontWeight:
-                                                             FontWeight
-                                                                 .w600),
-                                                       ))
-                                                 ],
-                                               )
-                                             ],
-                                           ),
-                                         )),
-                                   );
-                                 }
+                                 Navigator.push(
+                                   context,
+                                   MaterialPageRoute(
+                                     builder: (_) => VideoCallPage(
+                                       channelName: 'patient123', // unique per session
+                                     ),
+                                   ),
+                                 );
+                                 // if(appointmentData.meetingStatus=="1"){
+                                 //   if( formattedDate== appointmentData.date){
+                                 //     Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                                 //   }else{
+                                 //     Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
+                                 //   }
+                                 // }else{
+                                 //   showDialog(
+                                 //     context: context,
+                                 //     barrierDismissible: false,
+                                 //     builder: (context) => AlertDialog(
+                                 //         alignment: Alignment.center,
+                                 //         // backgroundColor: Colors.transparent,
+                                 //         content: Container(
+                                 //           padding: const EdgeInsets.all(15),
+                                 //           height: height * 0.25,
+                                 //           child: Column(
+                                 //             children: [
+                                 //               const TextContext(
+                                 //                   data: "Meeting!",
+                                 //                   fontSize: 14,
+                                 //                   color: Color(0xff000000),
+                                 //                   fontFamily: "poppins_reg",
+                                 //                   fontWeight:
+                                 //                   FontWeight.w500),
+                                 //               SizedBox(
+                                 //                 height: height * 0.03,
+                                 //               ),
+                                 //               TextfieldContext(
+                                 //                 controller: meetingCont,
+                                 //                 enabled: true,
+                                 //                 filled: true,
+                                 //                 fillColor:
+                                 //                 ColorConstant.whiteColor,
+                                 //                 intBorder: true,
+                                 //                 hintText:
+                                 //                 "Enter meeting link.",
+                                 //               ),
+                                 //               const Spacer(),
+                                 //               Row(
+                                 //                 mainAxisAlignment:
+                                 //                 MainAxisAlignment
+                                 //                     .spaceBetween,
+                                 //                 children: [
+                                 //                   InkWell(
+                                 //                       onTap: () {
+                                 //                         Navigator.of(context)
+                                 //                             .pop();
+                                 //                       },
+                                 //                       child: Container(
+                                 //                         decoration:
+                                 //                         BoxDecoration(
+                                 //                           borderRadius:
+                                 //                           BorderRadius
+                                 //                               .circular(
+                                 //                               5),
+                                 //                           color: ColorConstant
+                                 //                               .redColor,
+                                 //                         ),
+                                 //                         alignment:
+                                 //                         Alignment.center,
+                                 //                         height: height * 0.05,
+                                 //                         width: width * 0.25,
+                                 //                         // color: Colors.green,
+                                 //                         child: TextContext(
+                                 //                             data: "Cancel",
+                                 //                             fontSize: 12,
+                                 //                             color: ColorConstant
+                                 //                                 .whiteColor,
+                                 //                             fontFamily:
+                                 //                             "poppins_reg",
+                                 //                             fontWeight:
+                                 //                             FontWeight
+                                 //                                 .w600),
+                                 //                       )),
+                                 //                   InkWell(
+                                 //                       onTap: () {
+                                 //                           submit.meetingApi(appointmentData.userId, appointmentData.id, meetingCont.text,  context);
+                                 //                           Navigator.of(context)
+                                 //                               .pop();
+                                 //
+                                 //                       },
+                                 //                       child: Container(
+                                 //                         decoration:
+                                 //                         BoxDecoration(
+                                 //                           borderRadius:
+                                 //                           BorderRadius
+                                 //                               .circular(
+                                 //                               5),
+                                 //                           color: ColorConstant
+                                 //                               .primaryColor,
+                                 //                         ),
+                                 //                         alignment:
+                                 //                         Alignment.center,
+                                 //                         height: height * 0.05,
+                                 //                         width: width * 0.25,
+                                 //                         // color: Colors.green,
+                                 //                         child: TextContext(
+                                 //                             data: "Submit",
+                                 //                             fontSize: 12,
+                                 //                             color: ColorConstant
+                                 //                                 .whiteColor,
+                                 //                             fontFamily:
+                                 //                             "poppins_reg",
+                                 //                             fontWeight:
+                                 //                             FontWeight
+                                 //                                 .w600),
+                                 //                       ))
+                                 //                 ],
+                                 //               )
+                                 //             ],
+                                 //           ),
+                                 //         )),
+                                 //   );
+                                 // }
                                  // submit.savedIndices.contains(index)
 
                                },

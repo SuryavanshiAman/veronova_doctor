@@ -33,14 +33,14 @@ class _FaqsState extends State<Faqs> {
               child: Image.asset(
                 "assets/icon/arrow_1.png",
                 scale: 6,
-                color: const Color(0xff1E1E1E),
+                color: ColorConstant.whiteColor,
               )),
           centerTitle: true,
-          title: const TextContext(
+          title:  TextContext(
             data: "FAQs",
             fontSize: 17,
             fontWeight: FontWeight.w600,
-            color: Color(0xff1E1E1E),
+            color:ColorConstant.whiteColor,
           ),
           backgroundColor: ColorConstant.containerFillColor,
         ),

@@ -37,9 +37,23 @@ class _ProfileState extends State<Profile> {
   String dropdownValue = 'Heart';
   bool _isTextFieldEnabled = false;
   String? selectedItemId;
+  setData(){
+    final profileViewModel =
+    Provider.of<ProfileViewModel>(context, listen: false);
+    name.text=profileViewModel.modelData?.data?.name;
+    number.text=profileViewModel.modelData?.data?.mobile;
+    email.text=profileViewModel.modelData?.data?.email;
+    qualification.text=profileViewModel.modelData?.data?.qualification;
+    experience.text=profileViewModel.modelData?.data?.exp;
+    profession.text=profileViewModel.modelData?.data?.profession;
+    fees.text=profileViewModel.modelData?.data?.fees;
+    specialist.text=profileViewModel.modelData?.data?.specialties;
+    about.text=profileViewModel.modelData?.data?.about;
+  }
   @override
   void initState() {
     super.initState();
+    setData();
     final stateCityViewModel =
     Provider.of<StateCityViewModel>(context, listen: false);
     stateCityViewModel.getStateApi();
@@ -120,14 +134,14 @@ class _ProfileState extends State<Profile> {
             child: Image.asset(
               "assets/icon/arrow_1.png",
               scale: 6,
-              color: const Color(0xff1E1E1E),
+              color: ColorConstant.whiteColor,
             )),
         centerTitle: true,
         title: TextContext(
           data: _isTextFieldEnabled ? "Edit Account" : "View Account",
           fontSize: 17,
           fontWeight: FontWeight.w600,
-          color: const Color(0xff1E1E1E),
+          color: ColorConstant.whiteColor,
         ),
         backgroundColor: ColorConstant.containerFillColor,
       ),
@@ -162,7 +176,7 @@ class _ProfileState extends State<Profile> {
                       const TextContext(
                         textAlign: TextAlign.center,
                         data:
-                            'if you want to change/ correct mistakes , Go to "contact Us section. We will reach you out soon"',
+                            'If you want to change/correct mistakes , Go to "contact Us section. We will reach you out soon"',
                         maxLines: 2,
                         fontWeight: FontWeight.w100,
                         fontSize: 11,
@@ -238,7 +252,7 @@ class _ProfileState extends State<Profile> {
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
                   enabled: _isTextFieldEnabled,
-                  hintText: profileViewModel?.name ?? 'Enter Your Name',
+                  hintText: 'Enter Your Name',
                   hintStyle: TextStyle(
                       color: profileViewModel?.name == null
                           ? Colors.grey
@@ -255,7 +269,7 @@ class _ProfileState extends State<Profile> {
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
                   enabled: _isTextFieldEnabled,
-                  hintText: profileViewModel?.mobile.toString()??"",
+                  hintText: "Enter your mobile",
                   keyboardType: TextInputType.number,
                   hintStyle: const TextStyle(color: Colors.black),
                   prefixIcon: Icon(
@@ -275,7 +289,7 @@ class _ProfileState extends State<Profile> {
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
                   enabled: _isTextFieldEnabled,
-                  hintText: profileViewModel?.email ?? 'Enter Your Email',
+                  hintText:  'Enter Your Email',
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: Icon(
                     Icons.email,
@@ -303,7 +317,7 @@ class _ProfileState extends State<Profile> {
                   intBorder: false,
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
-                  hintText: profileViewModel?.qualification ??
+                  hintText:
                       'Enter Your Qualification',
                   enabled: _isTextFieldEnabled,
                   controller: qualification,
@@ -328,7 +342,7 @@ class _ProfileState extends State<Profile> {
                   intBorder: false,
                   fillColor: ColorConstant.whiteColor,
                   filled: true,
-                  hintText: profileViewModel?.exp ?? 'Enter Yor Experience ',
+                  hintText: 'Enter Yor Experience ',
                   keyboardType: TextInputType.number,
                   enabled: _isTextFieldEnabled,
                   controller: experience,
@@ -380,7 +394,7 @@ class _ProfileState extends State<Profile> {
             intBorder: false,
             fillColor: ColorConstant.whiteColor,
             filled: true,
-            hintText: profileViewModel?.profession ?? 'Enter Yor Profession ',
+            hintText: 'Enter Yor Profession ',
             enabled: _isTextFieldEnabled,
             controller: profession,
           ),
@@ -541,7 +555,7 @@ class _ProfileState extends State<Profile> {
                     intBorder: false,
                     fillColor: ColorConstant.whiteColor,
                     filled: true,
-                    hintText: profileViewModel?.about ?? 'Enter Your About',
+                    hintText:'Enter Your About',
                     enabled: _isTextFieldEnabled,
                     controller: about,
                   ),

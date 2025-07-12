@@ -1,3 +1,4 @@
+import 'package:doctor_apk/test.dart';
 import 'package:doctor_apk/utils/routes/routes_name.dart';
 import 'package:doctor_apk/view/account/document.dart';
 import 'package:doctor_apk/view/auth/fill_the_otp.dart';
@@ -6,6 +7,8 @@ import 'package:doctor_apk/view/auth/login_page.dart';
 import 'package:doctor_apk/view/auth/sign_up.dart';
 import 'package:doctor_apk/view/bottombar/bottom_bar.dart';
 import 'package:doctor_apk/view/document.dart';
+import 'package:doctor_apk/view/home/add_prescription_screen.dart';
+import 'package:doctor_apk/view/home/show_prescription_page.dart';
 import 'package:doctor_apk/view/no_internet.dart';
 import 'package:doctor_apk/view/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +30,10 @@ class Routers {
         return (context) => const HealthCradButton();
         case RoutesName.reqDocsVerification:
         return (context) => const ReqDocsVerification();
+      case RoutesName.addPrescriptionScreen:
+        return (context) => const AddPrescriptionScreen();
+      case RoutesName.prescriptionPage:
+        return (context) => const PrescriptionPage();
         case RoutesName.noInternet:
         return (context) => const NoInternet();
 

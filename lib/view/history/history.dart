@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../res/make_call.dart';
+import '../../utils/routes/routes_name.dart';
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -196,9 +197,15 @@ class _HistoryState extends State<History> {
                                               color: Color(0xff1E1E1E),
                                             ))
                                       ])),
-                                      Image.asset(
-                                        "assets/img/trangale.png",
-                                        scale: 4,
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.pushNamed(
+                                              context, RoutesName.prescriptionPage);
+                                        },
+                                        child: Image.asset(
+                                          "assets/img/show.png",
+                                          scale: 4,
+                                        ),
                                       )
                                     ],
                                   ),

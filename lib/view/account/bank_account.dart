@@ -72,14 +72,14 @@ class _BankAccountState extends State<BankAccount> {
             child: Image.asset(
               "assets/icon/arrow_1.png",
               scale: 6,
-              color: Color(0xff1E1E1E),
+              color: ColorConstant.whiteColor,
             )),
         centerTitle: true,
         title: TextContext(
           data: "Bank Details",
           fontSize: 17,
           fontWeight: FontWeight.w600,
-          color: Color(0xff1E1E1E),
+          color: ColorConstant.whiteColor,
         ),
         backgroundColor: ColorConstant.containerFillColor,
       ),
@@ -107,7 +107,7 @@ class _BankAccountState extends State<BankAccount> {
                 const TextContext(
                   textAlign: TextAlign.center,
                   data:
-                      'please fil the details carefully. If you want TO change/correct mistakes, Go to "Contact Us" section. we reach you out soon',
+                      'Please fil the details carefully.If you want to change/correct mistakes, Go to "Contact Us" section.We reach you out soon.',
                   fontWeight: FontWeight.w500,
                   fontSize: 11,
                     color:  Color(0xff000000),

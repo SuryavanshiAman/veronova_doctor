@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:doctor_apk/test.dart';
 import 'package:doctor_apk/utils/routes/routes.dart';
 import 'package:doctor_apk/utils/routes/routes_name.dart';
 import 'package:doctor_apk/view/no_internet.dart';
@@ -119,6 +120,7 @@ class _MyAppState extends State<MyApp> {
                 }
                 return null;
               },
+              // home: StylishPrescriptionFormPage(),
             ),
           );
   }

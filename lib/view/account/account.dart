@@ -113,35 +113,35 @@ class _AccountState extends State<Account> {
         "subtitle": "Complete profile",
         "img": "assets/icon/my_profile.png",
         "navigate": () => passFunction(context),
-        "icon": Icons.store
+        "icon": Icons.person
       },
       {
         "tittle": "Schedule",
         "subtitle": "MY Schedule",
         "img": "assets/icon/appointment.png",
         "navigate": () => schedulePage(context),
-        "icon": Icons.store
+        "icon": Icons.timer
       },
       {
         "tittle": "Document",
         "subtitle": "My Document",
         "img": "assets/icon/ambulance.png",
         "navigate": () => document(context),
-        "icon": Icons.description
+        "icon": Icons.document_scanner_outlined
       },
       {
         "tittle": "Bank",
         "subtitle": "Bank Detail",
         "img": "assets/icon/my_orders.png",
         "navigate": () => bank(context),
-        "icon": Icons.food_bank
+        "icon": Icons.account_balance
       },
       {
         "tittle": "Contact Us",
         "subtitle": "Let us help you",
         "img": "assets/icon/my_address.png",
         "navigate": () => contact(context),
-        "icon": Icons.mail
+        "icon": Icons.support_agent
       },
       {
         "tittle": "T&C",
@@ -155,7 +155,7 @@ class _AccountState extends State<Account> {
         "subtitle": "Our Policy",
         "img": "assets/icon/policy.png",
         "navigate": () => policy(context),
-        "icon": Icons.policy
+        "icon": Icons.local_police
       },
       {
         "tittle": "FAQs",
@@ -210,11 +210,12 @@ class _AccountState extends State<Account> {
                         Container(
                           padding: EdgeInsets.fromLTRB(
                               width * 0.12, height * 0.030, 0, 0),
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
                                   "assets/bgimg/acountBgi.png",
                                 ),
+
                                 fit: BoxFit.fitWidth),
                           ),
                           child: Column(
@@ -241,11 +242,11 @@ class _AccountState extends State<Account> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const TextContext(
+                                       TextContext(
                                         data: "Hello,",
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xff000000),
+                                        color: ColorConstant.blackColor,
                                         fontFamily: "poppins_reg",
                                       ),
                                       const SizedBox(
@@ -382,9 +383,17 @@ class _AccountState extends State<Account> {
                             onTap: data["navigate"],
                             child: Container(
                               decoration: BoxDecoration(
-                                color: ColorConstant.whiteColor,
-                                border: Border.all(
-                                    width: 0.2, color: ColorConstant.greyColor),
+                                // color: ColorConstant.whiteColor,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff008080).withAlpha(40),
+                                    blurRadius: 3,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                                // border: Border.all(
+                                //     width: 0.2, color: ColorConstant.greyColor),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Container(
@@ -415,9 +424,10 @@ class _AccountState extends State<Account> {
                                             fontFamily: "poppins_reg")
                                       ],
                                     ),
+                                    // Image(image: AssetImage())
                                     Icon(
                                       data["icon"],
-                                      color: ColorConstant.greyColor,
+                                      color: ColorConstant.containerFillColor,
                                     )
                                   ],
                                 ),
@@ -432,7 +442,7 @@ class _AccountState extends State<Account> {
                         alignment: Alignment.center,
                         child: const TextContext(
                           data:
-                              "HealthCRAD Doctor by\nBhavah Healthcare Pvt. Ltd.",
+                              "Veronova Doctor by\nFounder Code Technology Pvt. Ltd.",
                           maxLines: 2,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,

@@ -226,17 +226,17 @@ class _ReqDocsVerificationState extends State<ReqDocsVerification> {
               color: Color(0xff000000),
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(
-              height: height * 0.010,
-            ),
+            // SizedBox(
+            //   height: height * 0.01,
+            // ),
             SizedBox(
               width: width * 0.8,
               child: const TextContext(
                 data:
-                    "Government issued photo ID (Passport/Aadhaar/PAN Card)",
+                    "Government issued photo ID (Passport/Aadhaar/PAN Card).",
                 maxLines: 2,
                 color: Color(0xff7C7979),
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 textAlign: TextAlign.start,
                 fontSize: 10,
               ),

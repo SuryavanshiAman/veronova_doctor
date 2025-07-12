@@ -37,6 +37,7 @@ class Assets {
   static const String iconRight = 'assets/icon/right.png';
   static const String iconTc = 'assets/icon/tc.png';
   static const String iconTime = 'assets/icon/time.png';
+  static const String imgAdd = 'assets/img/add.png';
   static const String imgAppointDoctor = 'assets/img/appointDoctor.png';
   static const String imgAppointmentBlank = 'assets/img/appointment_blank.png';
   static const String imgDoctor2 = 'assets/img/doctor_2.png';
@@ -47,6 +48,8 @@ class Assets {
   static const String imgNoInternet = 'assets/img/no_internet.png';
   static const String imgProfile = 'assets/img/profile.png';
   static const String imgSearcDoc = 'assets/img/searcDoc.png';
+  static const String imgShow = 'assets/img/show.png';
   static const String imgTrangale = 'assets/img/trangale.png';
+  static const String imgVerified = 'assets/img/verified.png';
 
 }

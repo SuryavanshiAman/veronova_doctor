@@ -35,14 +35,14 @@ class _HelpSupportState extends State<HelpSupport> {
             child: Image.asset(
               "assets/icon/arrow_1.png",
               scale: 6,
-              color: Color(0xff1E1E1E),
+              color:ColorConstant.whiteColor,
             )),
         centerTitle: true,
         title: TextContext(
           data: "Support",
           fontSize: 17,
           fontWeight: FontWeight.w600,
-          color: Color(0xff1E1E1E),
+          color:ColorConstant.whiteColor,
         ),
         backgroundColor: ColorConstant.containerFillColor,
       ),
@@ -93,7 +93,7 @@ class _HelpSupportState extends State<HelpSupport> {
               filled: true,
               fillColor: ColorConstant.whiteColor,
               intBorder: false,
-              hintText: "Phone No.",
+              hintText: "Phone no.",
               prefixIcon: Icon(
                 Icons.call,
                 color: ColorConstant.primaryColor,
@@ -105,9 +105,12 @@ class _HelpSupportState extends State<HelpSupport> {
               height: height * 0.12,
               child: TextfieldContext(
                   controller: messageCon,
-                  prefixIcon: Icon(
-                    Icons.edit,
-                    color: ColorConstant.primaryColor,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(bottom: 58.0),
+                    child: Icon(
+                      Icons.edit,
+                      color: ColorConstant.primaryColor,
+                    ),
                   ),
                   maxLines: 5,
                   hintText: "Write your message",

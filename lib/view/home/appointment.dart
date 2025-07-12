@@ -63,11 +63,11 @@ class _HomeHealthCardState extends State<HomeHealthCard> {
                     )
                   ],
                   backgroundColor: ColorConstant.lightGrayColor,
-                  title: const TextContext(
+                  title:  TextContext(
                     data: "Appointments",
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xff1E1E1E),
+                    color:ColorConstant.whiteColor,
                   ),
                 ),
                 body: profileViewModel.documentstatus.toString() == "0"

@@ -34,14 +34,14 @@ class _PolicyState extends State<Policy> {
             child: Image.asset(
               "assets/icon/arrow_1.png",
               scale: 6,
-              color: Color(0xff1E1E1E),
+              color: ColorConstant.whiteColor,
             )),
         centerTitle: true,
         title: TextContext(
           data: "Policy",
           fontSize: 17,
           fontWeight: FontWeight.w600,
-          color: Color(0xff1E1E1E),
+          color: ColorConstant.whiteColor,
         ),
         backgroundColor: ColorConstant.containerFillColor,
       ),

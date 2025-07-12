@@ -269,22 +269,22 @@ class DoctorHistoryModel {
 }
 
 class Data {
-  int? id;
-  int? docId;
-  int? userId;
-  int? status;
-  String? updatedAt;
-  String? name;
-  String? mobile;
-  String? email;
-  Null? expertsId;
-  String? slotsId;
-  String? weekDay;
-  Null? description;
-  String? patientAge;
-  String? patientImage;
-  int? patientGender;
-  String? doctorFees;
+  dynamic id;
+  dynamic docId;
+  dynamic userId;
+  dynamic status;
+  dynamic updatedAt;
+  dynamic name;
+  dynamic mobile;
+  dynamic email;
+  dynamic expertsId;
+  dynamic slotsId;
+  dynamic weekDay;
+  dynamic description;
+  dynamic patientAge;
+  dynamic patientImage;
+  dynamic patientGender;
+  dynamic doctorFees;
 
   Data(
       {this.id,

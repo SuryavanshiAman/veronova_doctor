@@ -25,7 +25,8 @@ dependencies:
   photo_view:
   url_launcher:
   flutter_widget_from_html: ^0.9.0+2
-
+  agora_rtc_engine: ^6.2.4
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:

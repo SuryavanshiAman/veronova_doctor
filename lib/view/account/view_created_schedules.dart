@@ -126,8 +126,7 @@ class _SeeBookedAppointmentState extends State<SeeBookedAppointment> {
                                           horizontal: 10),
                                       child: InkWell(
                                         onTap: () {
-                                          slotProvider.setClickedDay(
-                                              index, context);
+                                          slotProvider.setClickedDay(index, context);
                                         },
                                         child: Container(
                                           alignment: Alignment.center,
@@ -156,7 +155,7 @@ class _SeeBookedAppointmentState extends State<SeeBookedAppointment> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               TextContext(
-                                                  data: data?.weekDay,
+                                                  data: data?.weekDay??"",
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                   fontFamily: "poppins_reg",

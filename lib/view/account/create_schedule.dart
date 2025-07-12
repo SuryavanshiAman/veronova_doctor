@@ -29,14 +29,14 @@ class _CreateScheduleState extends State<CreateSchedule> {
             child: Image.asset(
               "assets/icon/arrow_1.png",
               scale: 6,
-              color: const Color(0xff1E1E1E),
+              color:ColorConstant.whiteColor,
             )),
         centerTitle: true,
-        title: const TextContext(
+        title:  TextContext(
           data: "Create Schedule",
           fontSize: 17,
           fontWeight: FontWeight.w600,
-          color: Color(0xff1E1E1E),
+          color: ColorConstant.whiteColor,
         ),
         backgroundColor: ColorConstant.lightGrayColor,
       ),
@@ -79,14 +79,14 @@ class _CreateScheduleState extends State<CreateSchedule> {
           data: title,
           fontSize: AppConstant.fontSizeTwo,
           fontWeight: FontWeight.w600,
-          color: const Color(0xff1E1E1E),
+          color:ColorConstant.whiteColor,
           fontFamily: "poppins_reg",
         ),
         subtitle: TextContext(
           data: subTitle,
           fontSize: AppConstant.fontSizeOne,
           fontWeight: FontWeight.w500,
-          color: const Color(0xff979797),
+          color: ColorConstant.whiteColor,
           fontFamily: "poppins_reg",
         ),
         trailing: SizedBox(
@@ -94,9 +94,7 @@ class _CreateScheduleState extends State<CreateSchedule> {
           width: height * 0.040,
           child: Image.asset(
             "assets/icon/arrowIndi.png",
-            color: isAllowDarkBorder
-                ? ColorConstant.buttonBlueColor
-                : const Color(0xff13C7EB),
+            color:ColorConstant.whiteColor,
           ),
         ),
       ),

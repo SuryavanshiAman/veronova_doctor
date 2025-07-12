@@ -1,5 +1,6 @@
 class ApiUrl {
-  static const baseUrl = "https://veronova.khiladi11.live/api/";
+  // static const baseUrl = "https://veronova.khiladi11.live/api/";
+  static const baseUrl = "https://root.veronova.co.in/api/";
   static const loginUrl = "${baseUrl}doctor/login";
   static const registerUrl = "${baseUrl}reg/doctor";
 

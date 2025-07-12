@@ -126,6 +126,28 @@ class SlotViewModel with ChangeNotifier {
   SlotDateAndAvailabilityModel? get slotDateAvailability =>
       _slotDateAvailability;
 
+  void addSelectedSlot({
+    required String typeId,
+    required String title,
+    required String startTime,
+    required String endTime,
+    required String duration,
+  }) {
+    // Remove existing entry for same type to avoid duplicates
+    selectedSlotsData.removeWhere((element) => element["type_id"] == typeId);
+
+    selectedSlotsData.add({
+      "type_id": typeId,
+      "title": title,
+      "start_time": startTime,
+      "end_time": endTime,
+      "duration": duration,
+    });
+
+    notifyListeners();
+  }
+
+
   setSlotTypeTime(int i) {
     if (individualDaySchedule[i]["isChecked"]) {
       for (var data in individualDaySchedule[i]["slotDuration"]) {
