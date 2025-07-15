@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:doctor_apk/main.dart';
 import 'package:doctor_apk/res/app_constant.dart';
 import 'package:doctor_apk/res/textField_context.dart';
@@ -9,6 +11,7 @@ import 'package:doctor_apk/view_model/appointment_view_model.dart';
 import 'package:doctor_apk/view_model/document_verify_view_model.dart';
 import 'package:doctor_apk/view_model/meeting_view_model.dart';
 import 'package:doctor_apk/view_model/profile_view_model.dart';
+import 'package:doctor_apk/view_model/token_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
     _timeController.dispose();
     super.dispose();
   }
-
+  String generateRoomCode(int length) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    Random rnd = Random();
+    return String.fromCharCodes(
+        Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+  }
   @override
   Widget build(BuildContext context) {
     final appointmentViewModel = Provider.of<AppointmentViewModel>(context);
@@ -131,7 +139,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GestureDetector(
                                   onTap: (){
                                     Navigator.pushNamed(
-                                        context, RoutesName.addPrescriptionScreen);
+                                        context, RoutesName.addPrescriptionScreen,arguments: {
+                                          "name":appointmentData.name,
+                                           "phone":appointmentData.mobile.toString(),
+                                           "age":appointmentData.patientAge.toString(),
+                                           "gender":appointmentData.patientGender,
+                                           "appointmentId":appointmentData.id,
+                                           "slotId":appointmentData.slotsId,
+                                           "patientId":appointmentData.userId.toString(),
+
+                                    });
                                     // Navigator.push(context, MaterialPageRoute(builder: (context)=>AddPrescriptionScreen()));
                                   },
                                   child: Image.asset(
@@ -177,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   appointmentInfo("Name", appointmentData.name),
-                                  appointmentInfo("Phone",
-                                      appointmentData.mobile.toString()),
+                                  // appointmentInfo("Phone",
+                                  //     appointmentData.mobile.toString()),
                                   appointmentInfo("Patient Age",
                                       appointmentData.patientAge.toString()=="null"?"":appointmentData.patientAge.toString()),
                                   appointmentInfo("Patient Gender",
@@ -365,14 +382,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "5"?
                              GestureDetector(
                                onTap: () {
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(
-                                     builder: (_) => VideoCallPage(
-                                       channelName: 'patient123', // unique per session
-                                     ),
-                                   ),
-                                 );
+                            final String channel=generateRoomCode(6);
+                             Provider.of<TokenViewModel>(context,listen: false).tokenApi(context, channel)  ;
                                  // if(appointmentData.meetingStatus=="1"){
                                  //   if( formattedDate== appointmentData.date){
                                  //     Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);

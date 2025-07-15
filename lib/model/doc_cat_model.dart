@@ -32,14 +32,19 @@ class Data {
   String? name;
   int? type;
   String? image;
+  Null? updatedAt;
+  String? status;
 
-  Data({this.id, this.name, this.type, this.image});
+  Data(
+      {this.id, this.name, this.type, this.image, this.updatedAt, this.status});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     type = json['type'];
     image = json['image'];
+    updatedAt = json['updated_at'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +53,8 @@ class Data {
     data['name'] = this.name;
     data['type'] = this.type;
     data['image'] = this.image;
+    data['updated_at'] = this.updatedAt;
+    data['status'] = this.status;
     return data;
   }
 }

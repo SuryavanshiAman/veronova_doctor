@@ -32,6 +32,7 @@ class UpdateProfileViewModel with ChangeNotifier {
       dynamic specialties,
       dynamic profession,
       dynamic about,
+      dynamic subSpecialities,
       context) async {
     setLoading(true);
     UserViewModel userViewModel = UserViewModel();
@@ -51,10 +52,11 @@ print("Aman:$specialties");
       "specialties": specialties.toString(),
       "profession": profession,
       "about": about,
+      "sub_specialties":subSpecialities,
       "profile_pic":documentVerifyViewModel.idProfileImage!=null?base64Decode(documentVerifyViewModel.idProfileImage??""):""
     };
 
-    print("data ${data}");
+    print("Updatedata ${data}");
     _updateProfileRepo.updateProfileApi(data).then((value) {
       if (value['status'] == "200") {
         setLoading(false);

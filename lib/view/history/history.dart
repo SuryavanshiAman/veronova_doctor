@@ -6,6 +6,7 @@ import 'package:doctor_apk/res/common_filter_popup.dart';
 import 'package:doctor_apk/res/text_context.dart';
 import 'package:doctor_apk/res/color_constant.dart';
 import 'package:doctor_apk/view_model/doctor_view_model.dart';
+import 'package:doctor_apk/view_model/show_prescription_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -199,6 +200,7 @@ class _HistoryState extends State<History> {
                                       ])),
                                       GestureDetector(
                                         onTap: (){
+                                          Provider.of<ShowPrescriptionViewModel>(context,listen: false).showPrescriptionApi(context,data.id??"");
                                           Navigator.pushNamed(
                                               context, RoutesName.prescriptionPage);
                                         },

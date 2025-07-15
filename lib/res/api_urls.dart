@@ -2,6 +2,7 @@ class ApiUrl {
   // static const baseUrl = "https://veronova.khiladi11.live/api/";
   static const baseUrl = "https://root.veronova.co.in/api/";
   static const loginUrl = "${baseUrl}doctor/login";
+  static const agoraUrl = "https://root.veronova.co.in/agora/";
   static const registerUrl = "${baseUrl}reg/doctor";
 
   static const sendOtpUrl = "${baseUrl}doctor_otpsend";
@@ -27,4 +28,7 @@ class ApiUrl {
   static const meeting = "${baseUrl}add/consultation";
   static const viewBankDetails = "${baseUrl}bank/view";
   static const sendTime = "${baseUrl}appointment-date";
+  static const addPrescription = "${baseUrl}add/prescription";
+  static const showPrescription = "${baseUrl}prescription/list";
+  static const tokenApi = "${agoraUrl}generate/agora-token";
 }

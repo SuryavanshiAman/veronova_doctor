@@ -446,7 +446,8 @@ class _CreateIndividualState extends State<CreateIndividual> {
 
         final completeSlotDataFormat = {
           "doctor_id": userId,
-          "week_day": slotProvider.weekend[currentIndex].toString().toLowerCase(),
+          // "week_day": slotProvider.weekend[currentIndex].toString().toLowerCase(),
+          "week_day":dotCont.text,
           "slots": slotData,
         };
 

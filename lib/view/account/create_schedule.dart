@@ -47,7 +47,7 @@ class _CreateScheduleState extends State<CreateSchedule> {
               "Create Individual schedule for each day",
               const CreateIndividual()),
           buttonTile("See", "See Individual schedule for each day",
-              const SeeBookedAppointment() ,isAllowDarkBorder: true, slotType: "1"),
+              SeeBookedAppointment() ,isAllowDarkBorder: true, slotType: "1"),
         ],
       ),
     );

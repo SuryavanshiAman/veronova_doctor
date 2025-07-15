@@ -111,14 +111,16 @@
 //     );
 //   }
 // }
+import 'package:doctor_apk/view_model/token_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:doctor_apk/res/color_constant.dart';
+import 'package:provider/provider.dart';
 
-const String appId = "d0a32a9a76bd4e8a9e0a51612f4aa6da";
-const String token = "007eJxTYPBxWBTB5umqcPdVc51Dm9iPpe9Z7pqcLHv/PPnO3r+iX7wVGFIMEo2NEi0Tzc2SUkxSLRItUw0STQ3NDI3STBITzVISt7EWZTQEMjLc+mLEyMgAgSC+MENZalF+Xn5ZYnxKfnJJflF8YkE2AwMA4LEnpw==";
-const int uid = 0;
+// const String appId = "d0a32a9a76bd4e8a9e0a51612f4aa6da";
+// const String token = "007eJxTYPBxWBTB5umqcPdVc51Dm9iPpe9Z7pqcLHv/PPnO3r+iX7wVGFIMEo2NEi0Tzc2SUkxSLRItUw0STQ3NDI3STBITzVISt7EWZTQEMjLc+mLEyMgAgSC+MENZalF+Xn5ZYnxKfnJJflF8YkE2AwMA4LEnpw==";
+// const int uid = 0;
 
 class VideoCallPage extends StatefulWidget {
   final String channelName;
@@ -144,10 +146,11 @@ class _VideoCallPageState extends State<VideoCallPage> {
   }
 
   Future<void> initAgora() async {
+    final data =  Provider.of<TokenViewModel>(context,listen: false).modelData;
     await [Permission.microphone, Permission.camera].request();
 
     _engine = createAgoraRtcEngine();
-    await _engine?.initialize(RtcEngineContext(appId: appId));
+    await _engine?.initialize(RtcEngineContext(appId: data?.appId??""));
 
     _engine?.registerEventHandler(
       RtcEngineEventHandler(
@@ -166,9 +169,9 @@ class _VideoCallPageState extends State<VideoCallPage> {
     await _engine?.enableVideo();
     await _engine?.startPreview();
     await _engine?.joinChannel(
-      token: token,
+      token: data?.token??"",
       channelId: widget.channelName,
-      uid: uid,
+      uid: int.parse(data?.uid??""),
       options: const ChannelMediaOptions(),
     );
 

@@ -5,11 +5,13 @@ import 'package:doctor_apk/test.dart';
 import 'package:doctor_apk/utils/routes/routes.dart';
 import 'package:doctor_apk/utils/routes/routes_name.dart';
 import 'package:doctor_apk/view/no_internet.dart';
+import 'package:doctor_apk/view_model/add_prescription_view_model.dart';
 import 'package:doctor_apk/view_model/auth_view_model.dart';
 import 'package:doctor_apk/view_model/bank_view_model.dart';
 import 'package:doctor_apk/view_model/doctor_view_model.dart';
 import 'package:doctor_apk/view_model/help_view_model.dart';
 import 'package:doctor_apk/view_model/profile_view_model.dart';
+import 'package:doctor_apk/view_model/show_prescription_view_model.dart';
 import 'package:doctor_apk/view_model/slot_view_model.dart';
 import 'package:doctor_apk/view_model/state_city_view_model.dart';
 import 'package:doctor_apk/view_model/update_profile_view_model.dart';
@@ -22,6 +24,7 @@ import 'view_model/all_policies_view_model.dart';
 import 'view_model/appointment_view_model.dart';
 import 'view_model/document_verify_view_model.dart';
 import 'view_model/meeting_view_model.dart';
+import 'view_model/token_view_model.dart';
 import 'view_model/view_bank_details_view_model.dart';
 import 'view_model/view_slot_view_model.dart';
 
@@ -106,6 +109,9 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (context) => ViewSlotViewModel()),
               ChangeNotifierProvider(create: (context) => MeetingViewModel()),
               ChangeNotifierProvider(create: (context) => ViewBankDetailViewModel()),
+              ChangeNotifierProvider(create: (context) => AddPrescriptionViewModel()),
+              ChangeNotifierProvider(create: (context) => ShowPrescriptionViewModel()),
+              ChangeNotifierProvider(create: (context) => TokenViewModel()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

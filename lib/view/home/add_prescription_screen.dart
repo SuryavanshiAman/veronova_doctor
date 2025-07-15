@@ -1,6 +1,8 @@
 
 import 'package:doctor_apk/res/color_constant.dart';
+import 'package:doctor_apk/view_model/add_prescription_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class AddPrescriptionScreen extends StatefulWidget {
@@ -12,14 +14,32 @@ class AddPrescriptionScreen extends StatefulWidget {
 
 class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
   final _formKey = GlobalKey<FormState>();
-
+  String appointmentId="";
+  String slotId="";
+  String phone="";
+  String patientId="0";
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _symptomsController = TextEditingController();
   final TextEditingController _medicinesController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration.zero,(){
+    Map<String, dynamic> arguments =
+    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
+    _nameController.text = arguments["name"]??"";
+    phone = arguments["phone"]??"";
+    _ageController.text = arguments["age"]??"";
+    _genderController.text = arguments["gender"]??"";
+
+    });
+
+  }
   void _submit() {
     if (_formKey.currentState!.validate()) {
       // Add submission logic here
@@ -55,7 +75,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
       maxLines: maxLines,
       keyboardType: type,
       decoration: InputDecoration(
-        hintText: hint,
+        labelText: hint,
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -70,6 +90,12 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> arguments =
+    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      patientId = arguments["patientId"].toString();
+      appointmentId = arguments["appointmentId"].toString();
+      slotId = arguments["slotId"].toString();
+final addPrescription=Provider.of<AddPrescriptionViewModel>(context);
     return Scaffold(
       // backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
@@ -97,18 +123,19 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                         Expanded(child: _buildTextField(hint: 'Gender', controller: _genderController)),
                       ],
                     ),
+
                   ],
                 ),
               ),
               _buildCard(
                 icon: Icons.sick,
                 title: 'Symptoms',
-                child: _buildTextField(hint: 'e.g. Fever, cough, fatigue...', controller: _symptomsController, maxLines: 3),
+                child: _buildTextField(hint: 'Enter Symptoms', controller: _symptomsController, maxLines: 3),
               ),
               _buildCard(
                 icon: Icons.medication,
                 title: 'Medicines',
-                child: _buildTextField(hint: 'e.g. Paracetamol 500mg...', controller: _medicinesController, maxLines: 4),
+                child: _buildTextField(hint: 'Medicines', controller: _medicinesController, maxLines: 4),
               ),
               _buildCard(
                 icon: Icons.note_alt,
@@ -117,7 +144,16 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: _submit,
+                // onPressed: _submit,
+                onPressed: (){
+                  if (_formKey.currentState!.validate()) {
+                    // Add submission logic here
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text("Prescription Saved")),
+                    // );
+                    addPrescription.addPrescriptionApi(patientId, _nameController.text, phone, "email", slotId, _ageController.text, _genderController.text, appointmentId, _symptomsController.text, _medicinesController.text, _notesController.text, context);
+                  }
+                },
                 icon: const Icon(Icons.send,color: Colors.white),
                 label: const Text("Submit Prescription", style: TextStyle(fontSize: 16,color: Colors.white)),
                 style: ElevatedButton.styleFrom(

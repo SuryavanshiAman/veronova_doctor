@@ -58,17 +58,12 @@ class _ProfileState extends State<Profile> {
     Provider.of<StateCityViewModel>(context, listen: false);
     stateCityViewModel.getStateApi();
     stateCityViewModel.getDistrictApi("1");
-    final profileViewModel =
-        Provider.of<ProfileViewModel>(context, listen: false);
+    final profileViewModel = Provider.of<ProfileViewModel>(context, listen: false);
     profileViewModel.profileApi(context);
-    if (profileViewModel.modelData != null &&
-        profileViewModel.modelData!.data != null &&
-        profileViewModel.modelData!.data!.specialties != null) {
-      List<dynamic> listId =
-          jsonDecode(profileViewModel.modelData!.data!.specialties);
+    if (profileViewModel.modelData != null && profileViewModel.modelData!.data != null && profileViewModel.modelData!.data!.specialties != null) {
+      List<dynamic> listId = jsonDecode(profileViewModel.modelData!.data!.specialties);
       for (var resId in listId) {
-        final resName = profileViewModel.doctorDepartmentModelData!.data!
-            .where((e) => e.id == resId);
+        final resName = profileViewModel.doctorDepartmentModelData!.data!.where((e) => e.id == resId);
         selectedNotRemoveVal.addAll(resName);
       }
     }
@@ -107,6 +102,7 @@ class _ProfileState extends State<Profile> {
                 selectedSpecialitiesIds,
                 profession.text,
                 about.text,
+                condition,
                 context,
               );
             }
@@ -534,6 +530,7 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                   ),
+          Text(condition),
                 AppConstant.spaceHeight15,
                 TextContext(
                     data: "About",
@@ -542,6 +539,7 @@ class _ProfileState extends State<Profile> {
                     fontSize: 15,
                     fontFamily: "poppins_reg"),
                 AppConstant.spaceHeight15,
+
                 SizedBox(
                   width: width,
                   height: height * 0.1,
@@ -570,13 +568,12 @@ class _ProfileState extends State<Profile> {
 
   dynamic selectedState;
   dynamic selectedDistrict;
-
+String condition="";
   void _showSelectionBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        final items = Provider.of<ProfileViewModel>(context, listen: false)
-            .doctorDepartmentModelData!.data;
+        final items = Provider.of<ProfileViewModel>(context, listen: false).doctorDepartmentModelData!.data;
 
         return StatefulBuilder(
           builder: (context, setModalState) {
@@ -623,6 +620,25 @@ class _ProfileState extends State<Profile> {
                               : null,
                         ),
                         title: Text(item.name?.trim()??""),
+                        subtitle: isSelected
+                            ? DropdownButton<String>(
+                          value: item.status,
+                          items: const [
+                            DropdownMenuItem(
+                                value: "Normal",
+                                child: Text("Normal")),
+                            DropdownMenuItem(
+                                value: "Critical",
+                                child: Text("Critical")),
+                          ],
+                          onChanged: (val) {
+                            setModalState(() {
+                              item.status = val!;
+                              condition=item.status!;
+                            });
+                          },
+                        )
+                            : null,
                         trailing: Icon(
                           isSelected
                               ? Icons.check_box
@@ -674,4 +690,150 @@ class _ProfileState extends State<Profile> {
       },
     );
   }
+  // List<Map<String, dynamic>> departments = [
+  //   {
+  //     "name": "Cardiology",
+  //     "image": "https://via.placeholder.com/150",
+  //     "isSelected": false,
+  //     "status": "Normal",
+  //   },
+  //   {
+  //     "name": "Neurology",
+  //     "image": "https://via.placeholder.com/150",
+  //     "isSelected": false,
+  //     "status": "Normal",
+  //   },
+  //   {
+  //     "name": "Orthopedics",
+  //     "image": "https://via.placeholder.com/150",
+  //     "isSelected": false,
+  //     "status": "Normal",
+  //   },
+  // ];
+
+  // void _showSelectionBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     builder: (BuildContext context) {
+  //       final items = Provider.of<ProfileViewModel>(context, listen: false)
+  //           .doctorDepartmentModelData!
+  //           .data;
+  //
+  //       return StatefulBuilder(
+  //         builder: (context, setModalState) {
+  //           return Container(
+  //             height: MediaQuery.of(context).size.height * 0.8,
+  //             padding: const EdgeInsets.all(16),
+  //             child: Column(
+  //               children: [
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                   children: [
+  //                     const Text(
+  //                       'Select Your Specialities',
+  //                       style: TextStyle(
+  //                           fontWeight: FontWeight.w600,
+  //                           fontSize: 15,
+  //                           color: Color(0xff000000),
+  //                           fontFamily: "poppins_reg"),
+  //                     ),
+  //                     GestureDetector(
+  //                       onTap: () {
+  //                         Navigator.pop(context);
+  //                       },
+  //                       child: Icon(Icons.clear, color: ColorConstant.textColor),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 const Divider(color: Colors.grey, thickness: 1),
+  //                 Expanded(
+  //                   child: ListView.builder(
+  //                     itemCount: items!.length,
+  //                     itemBuilder: (context, index) {
+  //                       final item = items[index];
+  //
+  //                       final isSelected = selectedValues.contains(item);
+  //
+  //                       return Container(
+  //                         padding: const EdgeInsets.symmetric(vertical: 5),
+  //                         decoration: BoxDecoration(
+  //                           color: isSelected ? Colors.grey.shade100 : null,
+  //                           borderRadius: BorderRadius.circular(8),
+  //                         ),
+  //                         child: ListTile(
+  //                           leading: CircleAvatar(
+  //                             backgroundImage: item.image != null
+  //                                 ? NetworkImage(item.image ?? "")
+  //                                 : null,
+  //                           ),
+  //                           title: Text(item.name?.trim() ?? ""),
+  //                           subtitle: isSelected
+  //                               ? DropdownButton<String>(
+  //                             value: item.status,
+  //                             items: const [
+  //                               DropdownMenuItem(
+  //                                   value: "Normal",
+  //                                   child: Text("Normal")),
+  //                               DropdownMenuItem(
+  //                                   value: "Critical",
+  //                                   child: Text("Critical")),
+  //                             ],
+  //                             onChanged: (val) {
+  //                               setModalState(() {
+  //                                 item.status = val!;
+  //                               });
+  //                             },
+  //                           )
+  //                               : null,
+  //                           trailing: Icon(
+  //                             isSelected
+  //                                 ? Icons.check_box
+  //                                 : Icons.check_box_outline_blank,
+  //                             color: isSelected
+  //                                 ? ColorConstant.primaryColor
+  //                                 : null,
+  //                           ),
+  //                           onTap: () {
+  //                             setModalState(() {
+  //                               if (isSelected) {
+  //                                 selectedValues.remove(item);
+  //                               } else {
+  //                                 selectedValues.add(item);
+  //                                 item.status = "Normal"; // default status
+  //                               }
+  //                             });
+  //                             setState(() {});
+  //                           },
+  //                         ),
+  //                       );
+  //                     },
+  //                   ),
+  //                 ),
+  //                 if (selectedValues.isNotEmpty)
+  //                   Padding(
+  //                     padding: const EdgeInsets.symmetric(horizontal: 13),
+  //                     child: ButtonConst(
+  //                       height: 50,
+  //                       alignment: Alignment.center,
+  //                       borderRadius: BorderRadius.circular(5),
+  //                       color: ColorConstant.primaryColor,
+  //                       label: "Done",
+  //                       fontSize: 18,
+  //                       fontWeight: FontWeight.w600,
+  //                       onTap: () {
+  //                         Navigator.pop(context);
+  //                       },
+  //                     ),
+  //                   ),
+  //               ],
+  //             ),
+  //           );
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+
+
 }
