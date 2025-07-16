@@ -25,7 +25,7 @@ class TokenViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> tokenApi( context, dynamic channel,) async {
+  Future<void> tokenApi( context, dynamic channel,dynamic slotId, dynamic appointId,dynamic patientId) async {
     try {
       UserViewModel userViewModel = UserViewModel();
       String? userId = await userViewModel.getUser();
@@ -33,7 +33,11 @@ class TokenViewModel with ChangeNotifier {
 
       Map<String, dynamic> data = {
       "channelName": channel,
-      "uid": userId
+      "uid": "0",
+      "slots_id":slotId,
+    "doctor_id":userId,
+    "appointment_id":appointId,
+    "userid":patientId
       };
 
       final response = await _tokenRepo.tokenApi(data);
