@@ -316,220 +316,66 @@ class _HomeScreenState extends State<HomeScreen> {
                                     "0"
                                 ? acceptRejectButton(appointmentViewModel
                                     .currentAppointmentsModel!.data![index].id
-                                    .toString()):appointmentViewModel
-                        .currentAppointmentsModel!
-                        .data![index]
-                        .status
-                        .toString() ==
-                    "1"? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: width * 0.43,
-                                        height: height * 0.045,
-                                        child: TextfieldContext(
-                                          controller: _timeController,
-                                          enabled: true,
-                                          onTap:() => _selectTime(context),
-                                          filled: true,
-                                          fillColor:
-                                          ColorConstant.whiteColor,
-                                          intBorder: true,
-                                          readOnly:true,
-                                          hintText:
-                                          "Select meeting time ",
-                                          hintStyle: TextStyle(fontSize: 12),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          // _selectTime(context);
-                                          submit.sendTimeApi( appointmentData.id, _timeController.text,  context);
-                                        },
-                                        child:
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(5),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: ColorConstant
-                                                    .greenColor),
-                                          ),
-                                          alignment:
-                                          Alignment.center,
-                                          height: height * 0.045,
-                                          width: width * 0.4,
-                                          child: TextContext(
-                                            fontSize: 13,
-                                            data: "Submit Time",
-                                            color: ColorConstant
-                                                .greenColor,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ):
-                            appointmentViewModel
-                                .currentAppointmentsModel!
-                                .data![index]
-                                .status
-                                .toString() ==
-                                "5"?
-                             GestureDetector(
-                               onTap: () {
-                            final String channel=generateRoomCode(6);
-                             Provider.of<TokenViewModel>(context,listen: false).tokenApi(context, channel,appointmentData.slotsId,appointmentData.id,appointmentData.userId,)  ;
-                             //     if(appointmentData.meetingStatus=="1"){
-                             //       if( formattedDate== appointmentData.date){
-                             //         Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
-                             //       }else{
-                             //         Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
-                             //       }
-                             //     }else{
-                             //       showDialog(
-                             //         context: context,
-                             //         barrierDismissible: false,
-                             //         builder: (context) => AlertDialog(
-                             //             alignment: Alignment.center,
-                             //             // backgroundColor: Colors.transparent,
-                             //             content: Container(
-                             //               padding: const EdgeInsets.all(15),
-                             //               height: height * 0.25,
-                             //               child: Column(
-                             //                 children: [
-                             //                   const TextContext(
-                             //                       data: "Meeting!",
-                             //                       fontSize: 14,
-                             //                       color: Color(0xff000000),
-                             //                       fontFamily: "poppins_reg",
-                             //                       fontWeight:
-                             //                       FontWeight.w500),
-                             //                   SizedBox(
-                             //                     height: height * 0.03,
-                             //                   ),
-                             //                   TextfieldContext(
-                             //                     controller: meetingCont,
-                             //                     enabled: true,
-                             //                     filled: true,
-                             //                     fillColor:
-                             //                     ColorConstant.whiteColor,
-                             //                     intBorder: true,
-                             //                     hintText:
-                             //                     "Enter meeting link.",
-                             //                   ),
-                             //                   const Spacer(),
-                             //                   Row(
-                             //                     mainAxisAlignment:
-                             //                     MainAxisAlignment
-                             //                         .spaceBetween,
-                             //                     children: [
-                             //                       InkWell(
-                             //                           onTap: () {
-                             //                             Navigator.of(context)
-                             //                                 .pop();
-                             //                           },
-                             //                           child: Container(
-                             //                             decoration:
-                             //                             BoxDecoration(
-                             //                               borderRadius:
-                             //                               BorderRadius
-                             //                                   .circular(
-                             //                                   5),
-                             //                               color: ColorConstant
-                             //                                   .redColor,
-                             //                             ),
-                             //                             alignment:
-                             //                             Alignment.center,
-                             //                             height: height * 0.05,
-                             //                             width: width * 0.25,
-                             //                             // color: Colors.green,
-                             //                             child: TextContext(
-                             //                                 data: "Cancel",
-                             //                                 fontSize: 12,
-                             //                                 color: ColorConstant
-                             //                                     .whiteColor,
-                             //                                 fontFamily:
-                             //                                 "poppins_reg",
-                             //                                 fontWeight:
-                             //                                 FontWeight
-                             //                                     .w600),
-                             //                           )),
-                             //                       InkWell(
-                             //                           onTap: () {
-                             //                               submit.meetingApi(appointmentData.userId, appointmentData.id, meetingCont.text,  context);
-                             //                               Navigator.of(context)
-                             //                                   .pop();
-                             //
-                             //                           },
-                             //                           child: Container(
-                             //                             decoration:
-                             //                             BoxDecoration(
-                             //                               borderRadius:
-                             //                               BorderRadius
-                             //                                   .circular(
-                             //                                   5),
-                             //                               color: ColorConstant
-                             //                                   .primaryColor,
-                             //                             ),
-                             //                             alignment:
-                             //                             Alignment.center,
-                             //                             height: height * 0.05,
-                             //                             width: width * 0.25,
-                             //                             // color: Colors.green,
-                             //                             child: TextContext(
-                             //                                 data: "Submit",
-                             //                                 fontSize: 12,
-                             //                                 color: ColorConstant
-                             //                                     .whiteColor,
-                             //                                 fontFamily:
-                             //                                 "poppins_reg",
-                             //                                 fontWeight:
-                             //                                 FontWeight
-                             //                                     .w600),
-                             //                           ))
-                             //                     ],
-                             //                   )
-                             //                 ],
-                             //               ),
-                             //             )),
-                             //       );
-                             //     }
-                             //     submit.savedIndices.contains(index);
-
-                               },
-                               child: SizedBox(
-                                 child: Container(
-                                   decoration: BoxDecoration(
-                                     borderRadius: BorderRadius.circular(5),
-                                     border: Border.all(
-                                         width: 1,
-                                         color: ColorConstant.greenColor),
-                                   ),
-                                   alignment: Alignment.center,
-                                   height: height * 0.045,
-                                   width: width * 0.3,
-                                   child: TextContext(
-                                     fontSize: 13,
-                                     data: appointmentData.meetingStatus=="1"
-                                         ? "Start"
-                                         : "Meeting",
-                                     color: ColorConstant.greenColor,
-                                     fontWeight: FontWeight.w500,
-                                   ),
-                                 ),
-                               ),
-                             )
-                                :appointmentViewModel
-                        .currentAppointmentsModel!
-                        .data![index]
-                        .status
-                        .toString() ==
-                    "2"?GestureDetector(
+                                    .toString()):
+                    //         appointmentViewModel
+                    //     .currentAppointmentsModel!
+                    //     .data![index]
+                    //     .status
+                    //     .toString() ==
+                    // "1"? Row(
+                    //                 mainAxisAlignment:
+                    //                     MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   SizedBox(
+                    //                     width: width * 0.43,
+                    //                     height: height * 0.045,
+                    //                     child: TextfieldContext(
+                    //                       controller: _timeController,
+                    //                       enabled: true,
+                    //                       onTap:() => _selectTime(context),
+                    //                       filled: true,
+                    //                       fillColor:
+                    //                       ColorConstant.whiteColor,
+                    //                       intBorder: true,
+                    //                       readOnly:true,
+                    //                       hintText:
+                    //                       "Select meeting time ",
+                    //                       hintStyle: TextStyle(fontSize: 12),
+                    //                     ),
+                    //                   ),
+                    //                   GestureDetector(
+                    //                     onTap: () {
+                    //                       // _selectTime(context);
+                    //                       submit.sendTimeApi( appointmentData.id, _timeController.text,  context);
+                    //                     },
+                    //                     child:
+                    //                     Container(
+                    //                       decoration: BoxDecoration(
+                    //                         borderRadius:
+                    //                         BorderRadius
+                    //                             .circular(5),
+                    //                         border: Border.all(
+                    //                             width: 1,
+                    //                             color: ColorConstant
+                    //                                 .greenColor),
+                    //                       ),
+                    //                       alignment:
+                    //                       Alignment.center,
+                    //                       height: height * 0.045,
+                    //                       width: width * 0.4,
+                    //                       child: TextContext(
+                    //                         fontSize: 13,
+                    //                         data: "Submit Time",
+                    //                         color: ColorConstant
+                    //                             .greenColor,
+                    //                         fontWeight:
+                    //                         FontWeight.w500,
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               ):
+                            GestureDetector(
                               onTap: () {
                                 final String channel=generateRoomCode(6);
                                 Provider.of<TokenViewModel>(context,listen: false).tokenApi(context, channel,appointmentData.slotsId,appointmentData.id,appointmentData.userId,)  ;
@@ -564,39 +410,230 @@ class _HomeScreenState extends State<HomeScreen> {
                                   FontWeight.w500,
                                 ),
                               ),
-                            ):
-                    GestureDetector(
-                              onTap: () {
-                                documentVerifyViewModel
-                                    .statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(),
-                                    "4",
-                                    context);
-                              },
-                              child:
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius
-                                      .circular(5),
-                                  border: Border.all(
-                                      width: 1,
-                                      color: ColorConstant
-                                          .redColor),
-                                ),
-                                alignment:
-                                Alignment.center,
-                                height: height * 0.045,
-                                width: width * 0.4,
-                                child: TextContext(
-                                  fontSize: 13,
-                                  data: "End",
-                                  color: ColorConstant
-                                      .redColor,
-                                  fontWeight:
-                                  FontWeight.w500,
-                                ),
-                              ),
                             )
+                    //         appointmentViewModel
+                    //             .currentAppointmentsModel!
+                    //             .data![index]
+                    //             .status
+                    //             .toString() ==
+                    //             "5"?
+                    //          GestureDetector(
+                    //            onTap: () {
+                    //         final String channel=generateRoomCode(6);
+                    //          Provider.of<TokenViewModel>(context,listen: false).tokenApi(context, channel,appointmentData.slotsId,appointmentData.id,appointmentData.userId,)  ;
+                    //          //     if(appointmentData.meetingStatus=="1"){
+                    //          //       if( formattedDate== appointmentData.date){
+                    //          //         Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                    //          //       }else{
+                    //          //         Utils.show("You can start meeting on ${ DateFormat('EE, dd MMM').format(DateTime.parse(appointmentData.date))}", context);
+                    //          //       }
+                    //          //     }else{
+                    //          //       showDialog(
+                    //          //         context: context,
+                    //          //         barrierDismissible: false,
+                    //          //         builder: (context) => AlertDialog(
+                    //          //             alignment: Alignment.center,
+                    //          //             // backgroundColor: Colors.transparent,
+                    //          //             content: Container(
+                    //          //               padding: const EdgeInsets.all(15),
+                    //          //               height: height * 0.25,
+                    //          //               child: Column(
+                    //          //                 children: [
+                    //          //                   const TextContext(
+                    //          //                       data: "Meeting!",
+                    //          //                       fontSize: 14,
+                    //          //                       color: Color(0xff000000),
+                    //          //                       fontFamily: "poppins_reg",
+                    //          //                       fontWeight:
+                    //          //                       FontWeight.w500),
+                    //          //                   SizedBox(
+                    //          //                     height: height * 0.03,
+                    //          //                   ),
+                    //          //                   TextfieldContext(
+                    //          //                     controller: meetingCont,
+                    //          //                     enabled: true,
+                    //          //                     filled: true,
+                    //          //                     fillColor:
+                    //          //                     ColorConstant.whiteColor,
+                    //          //                     intBorder: true,
+                    //          //                     hintText:
+                    //          //                     "Enter meeting link.",
+                    //          //                   ),
+                    //          //                   const Spacer(),
+                    //          //                   Row(
+                    //          //                     mainAxisAlignment:
+                    //          //                     MainAxisAlignment
+                    //          //                         .spaceBetween,
+                    //          //                     children: [
+                    //          //                       InkWell(
+                    //          //                           onTap: () {
+                    //          //                             Navigator.of(context)
+                    //          //                                 .pop();
+                    //          //                           },
+                    //          //                           child: Container(
+                    //          //                             decoration:
+                    //          //                             BoxDecoration(
+                    //          //                               borderRadius:
+                    //          //                               BorderRadius
+                    //          //                                   .circular(
+                    //          //                                   5),
+                    //          //                               color: ColorConstant
+                    //          //                                   .redColor,
+                    //          //                             ),
+                    //          //                             alignment:
+                    //          //                             Alignment.center,
+                    //          //                             height: height * 0.05,
+                    //          //                             width: width * 0.25,
+                    //          //                             // color: Colors.green,
+                    //          //                             child: TextContext(
+                    //          //                                 data: "Cancel",
+                    //          //                                 fontSize: 12,
+                    //          //                                 color: ColorConstant
+                    //          //                                     .whiteColor,
+                    //          //                                 fontFamily:
+                    //          //                                 "poppins_reg",
+                    //          //                                 fontWeight:
+                    //          //                                 FontWeight
+                    //          //                                     .w600),
+                    //          //                           )),
+                    //          //                       InkWell(
+                    //          //                           onTap: () {
+                    //          //                               submit.meetingApi(appointmentData.userId, appointmentData.id, meetingCont.text,  context);
+                    //          //                               Navigator.of(context)
+                    //          //                                   .pop();
+                    //          //
+                    //          //                           },
+                    //          //                           child: Container(
+                    //          //                             decoration:
+                    //          //                             BoxDecoration(
+                    //          //                               borderRadius:
+                    //          //                               BorderRadius
+                    //          //                                   .circular(
+                    //          //                                   5),
+                    //          //                               color: ColorConstant
+                    //          //                                   .primaryColor,
+                    //          //                             ),
+                    //          //                             alignment:
+                    //          //                             Alignment.center,
+                    //          //                             height: height * 0.05,
+                    //          //                             width: width * 0.25,
+                    //          //                             // color: Colors.green,
+                    //          //                             child: TextContext(
+                    //          //                                 data: "Submit",
+                    //          //                                 fontSize: 12,
+                    //          //                                 color: ColorConstant
+                    //          //                                     .whiteColor,
+                    //          //                                 fontFamily:
+                    //          //                                 "poppins_reg",
+                    //          //                                 fontWeight:
+                    //          //                                 FontWeight
+                    //          //                                     .w600),
+                    //          //                           ))
+                    //          //                     ],
+                    //          //                   )
+                    //          //                 ],
+                    //          //               ),
+                    //          //             )),
+                    //          //       );
+                    //          //     }
+                    //          //     submit.savedIndices.contains(index);
+                    //
+                    //            },
+                    //            child: SizedBox(
+                    //              child: Container(
+                    //                decoration: BoxDecoration(
+                    //                  borderRadius: BorderRadius.circular(5),
+                    //                  border: Border.all(
+                    //                      width: 1,
+                    //                      color: ColorConstant.greenColor),
+                    //                ),
+                    //                alignment: Alignment.center,
+                    //                height: height * 0.045,
+                    //                width: width * 0.3,
+                    //                child: TextContext(
+                    //                  fontSize: 13,
+                    //                  data: appointmentData.meetingStatus=="1"
+                    //                      ? "Start"
+                    //                      : "Meeting",
+                    //                  color: ColorConstant.greenColor,
+                    //                  fontWeight: FontWeight.w500,
+                    //                ),
+                    //              ),
+                    //            ),
+                    //          )
+                    //             :appointmentViewModel
+                    //     .currentAppointmentsModel!
+                    //     .data![index]
+                    //     .status
+                    //     .toString() ==
+                    // "2"?GestureDetector(
+                    //           onTap: () {
+                    //             final String channel=generateRoomCode(6);
+                    //             Provider.of<TokenViewModel>(context,listen: false).tokenApi(context, channel,appointmentData.slotsId,appointmentData.id,appointmentData.userId,)  ;
+                    //
+                    //             // Utils.launchURL(  appointmentViewModel.currentAppointmentsModel!.data![index].meeting);
+                    //             // documentVerifyViewModel
+                    //             //     .statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(),
+                    //             //     "6",
+                    //             //     context);
+                    //           },
+                    //           child:
+                    //           Container(
+                    //             decoration: BoxDecoration(
+                    //               borderRadius:
+                    //               BorderRadius
+                    //                   .circular(5),
+                    //               border: Border.all(
+                    //                   width: 1,
+                    //                   color: ColorConstant
+                    //                       .greenColor),
+                    //             ),
+                    //             alignment:
+                    //             Alignment.center,
+                    //             height: height * 0.045,
+                    //             width: width * 0.4,
+                    //             child: TextContext(
+                    //               fontSize: 13,
+                    //               data: "Start Meeting",
+                    //               color: ColorConstant
+                    //                   .greenColor,
+                    //               fontWeight:
+                    //               FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ):
+                    // GestureDetector(
+                    //           onTap: () {
+                    //             documentVerifyViewModel
+                    //                 .statusUpdateApi(appointmentViewModel.currentAppointmentsModel!.data![index].id.toString(),
+                    //                 "4",
+                    //                 context);
+                    //           },
+                    //           child:
+                    //           Container(
+                    //             decoration: BoxDecoration(
+                    //               borderRadius:
+                    //               BorderRadius
+                    //                   .circular(5),
+                    //               border: Border.all(
+                    //                   width: 1,
+                    //                   color: ColorConstant
+                    //                       .redColor),
+                    //             ),
+                    //             alignment:
+                    //             Alignment.center,
+                    //             height: height * 0.045,
+                    //             width: width * 0.4,
+                    //             child: TextContext(
+                    //               fontSize: 13,
+                    //               data: "End",
+                    //               color: ColorConstant
+                    //                   .redColor,
+                    //               fontWeight:
+                    //               FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         )
                           )
                         ],
                       ),

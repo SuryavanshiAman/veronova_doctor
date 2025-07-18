@@ -4,6 +4,7 @@ import 'package:doctor_apk/model/token_model.dart';
 import 'package:doctor_apk/repo/profile_repo.dart';
 import 'package:doctor_apk/repo/show_priscription_repo.dart';
 import 'package:doctor_apk/repo/token_repo.dart';
+import 'package:doctor_apk/test.dart';
 import 'package:doctor_apk/view/video_call/video_call_screen.dart';
 import 'package:doctor_apk/view_model/user_view_model.dart';
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/doc_cat_model.dart';
+import '../test2.dart';
 import '../utils/utils.dart';
 
 
@@ -48,7 +50,9 @@ class TokenViewModel with ChangeNotifier {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => VideoCallPage(
+            builder: (_) =>
+                // AgoraAgoraVideoScreen(channelName:modelData?.channelName??"",)
+                VideoCallPage(
               channelName: modelData?.channelName??"", // unique per session
             ),
           ),

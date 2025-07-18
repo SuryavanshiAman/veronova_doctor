@@ -5,6 +5,7 @@ import 'package:doctor_apk/test.dart';
 import 'package:doctor_apk/utils/routes/routes.dart';
 import 'package:doctor_apk/utils/routes/routes_name.dart';
 import 'package:doctor_apk/view/no_internet.dart';
+import 'package:doctor_apk/view/video_call/video_call_screen.dart';
 import 'package:doctor_apk/view_model/add_prescription_view_model.dart';
 import 'package:doctor_apk/view_model/auth_view_model.dart';
 import 'package:doctor_apk/view_model/bank_view_model.dart';
@@ -126,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                 }
                 return null;
               },
-              // home: StylishPrescriptionFormPage(),
+              // home: VideoStream(),
             ),
           );
   }
