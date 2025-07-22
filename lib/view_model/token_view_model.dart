@@ -52,7 +52,7 @@ class TokenViewModel with ChangeNotifier {
           MaterialPageRoute(
             builder: (_) =>
                 // AgoraAgoraVideoScreen(channelName:modelData?.channelName??"",)
-                VideoCallPage(
+            VideoScreen(
               channelName: modelData?.channelName??"", // unique per session
             ),
           ),

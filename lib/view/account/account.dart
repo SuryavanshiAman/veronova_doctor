@@ -387,7 +387,7 @@ class _AccountState extends State<Account> {
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff008080).withAlpha(40),
+                                    color: Color(0xff38422B).withAlpha(80),
                                     blurRadius: 3,
                                     offset: Offset(2, 2),
                                   ),
